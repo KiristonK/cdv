@@ -19,3 +19,8 @@ for letter in string:
 print('\n')
 for num in range(1,11):
     print(f'Numer : {num}\n', end='')
+
+
+#wyswietl liczby z listy , break na  q, quit, end
+
+
