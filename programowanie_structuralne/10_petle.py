@@ -22,5 +22,3 @@ for num in range(1,11):
 
 
 #wyswietl liczby z listy , break na  q, quit, end
-
-
