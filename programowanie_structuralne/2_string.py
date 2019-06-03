@@ -63,27 +63,10 @@ print(dzien, misianc, rok)
 print("\nData : ", end="")
 print(dzien, misianc, rok, sep="-")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+stroka = input()
+result = 0
+for i in range(0, len(stroka)):
+	result += int(stroka[i])
+print(result)
 
 print()
