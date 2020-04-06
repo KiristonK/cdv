@@ -1,0 +1,38 @@
+.menuBrick{
+    width: 35px;
+    height: 5px;
+    background-color: black;
+    margin: 6px 0;
+}
+
+.menu{
+    min-width: 170px;
+}
+
+.day{
+    background-color: #a5ecff;
+}
+
+.day:hover{
+    background-color: #5dfffc;
+}
+
+.navbar-kalendar{
+    height: 3em;
+    justify-content: center;
+}
+.kalNavTitle{
+    justify-content: center;
+    border: 1px solid #000000;
+    width: 10rem;
+    height: 2rem;
+}
+.arrowsLeft{
+    position: absolute;
+    left: 0;
+}
+
+.arrowsRight{
+    position: absolute;
+    right: 0;
+}
