@@ -43,23 +43,23 @@
 
         </div>
     </div>
-    <div class="col-9">
+    <div class="col-9" id="kalDays">
         <div class="row navbar-kalendar">
             <div class="arrowsLeft">
                 <i class="fas fa-angle-double-left fa-3x"></i>
             </div>
             <div class="col mt-2">
-                <ul class="nav nav-tabs ml-5 mr-5">
+                <ul class="nav nav-tabs ml-5 mr-5" id="monthes">
                     <?php
                         for ($month = 0; $month < 12; $month++){
                             $mName = date('F', mktime(0, 0, 0, $month, 10));;
                             if (date('m', time()) == $month){
-                                echo '<li class="nav-item"><a class="nav-link active" href="#">';
+                                echo "<li class=\"nav-item monthes\" id=\"{$month}\"><a class=\"nav-link active monthes\" href=\"#\">";
                                 echo  $mName;
                                 echo '</a></li>';
                             }
                             else{
-                                echo '<li class="nav-item"><a class="nav-link" href="#">';
+                                echo "<li class=\"nav-item monthes\" id=\"{$month}\"><a class=\"nav-link monthes\" href=\"#\">";
                                 echo  $mName;
                                 echo '</a></li>';
                             }
@@ -71,28 +71,7 @@
                 <i class="fas fa-angle-double-right fa-3x"></i>
             </div>
         </div>
-        <div class="row">
-            <?php
-                for ($i = 1; $i<8; $i++){
-                    echo '<div class="card-body m-2 rounded day justify-content-center" style="width: 5rem; height: 5rem;"><h3 class="font-weight-light">';
-                    echo date('l', mktime(0,0, 0,0,$i));
-                    echo '</h3></div>';
 
-//                    echo '<div class="card-header m-2 rounded day" style="width: 5rem; height: 5rem;">';
-//                    ///echo date('l', mktime(0,0,$i,0,1));
-//                    echo '</div>';
-                }
-            ?>
-        </div>
-        <?php
-        for ($j = 0; $j < 5; $j++) {
-            echo '<div class="row">';
-            for ($i = 0; $i < 7; $i++) {
-                echo '<div class="card-body m-2 rounded day" style="width: 5rem; height: 5rem;"></div>';
-            }
-            echo '</div>';
-        }
-        ?>
     </div>
     <div class="col" style="width:10px; background-color: #b8daff;">
 
@@ -112,9 +91,36 @@
 
 
 <script>
+    function createKal(day){
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const date = new Date();
+        let month = 0;
+        $( "li" ).each(function( index ) {
+            if (index === date.getMonth()) month = index;
+        });
+        if (day == null || day === 0) day = 1;
+        for (let y = 0; y<5; y++){
+            document.getElementById('kalDays').innerHTML+= '<div class="row" id=week'+y+'>\n'
+            for (let i = 1; i<8; i++) {
+                if ( new Date(Date.UTC(date.getFullYear(),date.getMonth(), day, 0,0)).getDay() === i-1 && day <= new Date(Date.UTC(date.getFullYear(),month+1,0)).getDate()) {
+                    document.getElementById('week' + y).innerHTML += "<div class=\"card-body m-2 p-0 rounded day justify-content-end\"><h1 class=\"display-4 mb-2 ml-2\">" + day + "</h1></div>\n";
+                    day++;
+                } else{
+                    document.getElementById('week' + y).innerHTML += "<div class=\"card-body m-2 p-0 rounded day justify-content-end\"><h1 class=\"display-4 mb-2 ml-2\"></h1></div>\n";
+                }
+            }
+        }
+    }
       $(document).ready(function () {
+          $(".monthes").on('click', function(event){
+              event.stopPropagation();
+              event.stopImmediatePropagation();
+              //(... rest of your JS code)
+              alert("Click");
+          });
         $('#lMenuHide').click(function () {
             $('#menuTitle').toggle(100);
         })
+          createKal(0);
     });
 </script>

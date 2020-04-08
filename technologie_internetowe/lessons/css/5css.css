@@ -1,0 +1,19 @@
+.first {
+    border: solid thin green;
+    border-top: dotted medium greenyellow;
+    border-style: double;
+}
+
+.second {
+    border: solid medium green;
+    border-width: 1px 5px 15px 8px;
+    border-top-style: double;
+    border-right-style: dashed;
+    border-bottom-style: groove;
+    border-left-style: ridge;
+}
+
+.third {
+    border: solid thick green;
+    border-bottom-style: none;
+}

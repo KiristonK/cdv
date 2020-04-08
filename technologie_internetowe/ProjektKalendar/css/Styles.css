@@ -10,6 +10,8 @@
 }
 
 .day{
+    width: 5rem;
+    height: 5rem;
     background-color: #a5ecff;
 }
 
