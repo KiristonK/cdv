@@ -2,24 +2,30 @@
     width: 35px;
     height: 5px;
     background-color: black;
-    margin: 6px 0;
+    margin: 6px 0 6px 6px;
 }
 
-.menu{
-    min-width: 170px;
+.menu {
+    min-width: 55px;
+    flex: 0 0 8%;
 }
 
-.day{
+.menuControls {
+    max-width: 98px;
+    margin: 0;
+}
+
+.day {
     width: 5rem;
     height: 5rem;
     background-color: #a5ecff;
 }
 
-.day:hover{
+.day:hover {
     background-color: #5dfffc;
 }
 
-.navbar-kalendar{
+.navbar-kalendar {
     height: 3em;
     justify-content: center;
 }
