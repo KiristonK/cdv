@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <title>Kalendar</title>
+    <title>SCalendar</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-grid.css">
     <link rel="stylesheet" href="css/bootstrap-reboot.css">
@@ -15,10 +15,11 @@
 </head>
 
 <body>
+<!--suppress HtmlFormInputWithoutLabel -->
 <input type="text" hidden value="Month" id="showType"/>
 <div class="row">
     <div class="col-3" style="border: 1px solid #000000;">
-        <h1 class="font-weight-light">SKalendar</h1>
+        <h1 class="font-weight-light">SCalendar</h1>
     </div>
     <div class="col-6" style="border: 1px solid #000000;">
         <h1 class="display-4">Middle</h1>
@@ -31,10 +32,10 @@
     <div class="col-2 menu w-auto" style="border: 1px solid #000000;" id="left-side-menu">
         <div class="row">
             <div class="col" style="width: 100px; overflow: visible;" id="menuTitle">
-                <h4 class="font-weight-light">SKalendar</h4>
+                <h4 class="font-weight-light">SCalendar</h4>
             </div>
             <div class="col pl-4" id="bricks">
-                <div class="row" name="menuIcon" id="lMenuHide" style="right: 0">
+                <div class="row" id="lMenuHide" style="right: 0">
                     <div class="col" style="width: 40px;">
                         <div class="row menuBrick rounded"></div>
                         <div class="row menuBrick rounded"></div>
@@ -75,40 +76,40 @@
             </div>
         </div>
     </div>
-    <div class="col-11" id="kalDays">
-        <div class="row navbar-kalendar">
-            <div class="arrowsLeft">
-                <i class="fas fa-angle-double-left fa-3x"></i>
+    <div class="col-11">
+        <div class="row navbar-calendar">
+            <div class="col-1 arrowsLeft">
+                <i class="fas fa-angle-double-left fa-3x" style="z-index: 999;"></i>
             </div>
-            <div class="col mt-2 justify-content-center">
+            <div class="col-10 mt-2 justify-content-center">
                 <ul class="nav nav-tabs ml-5 mr-5 justify-content-center" id="monthes">
                     <?php
-                        for ($month = 0; $month < 12; $month++){
-                            $mName = date('F', mktime(0, 0, 0, $month, 10));
-                            if (date('m', time()) == $month) {
-                                echo "<li class=\"nav-item monthes\" id=\"{$month}\"><a class=\"nav-link active\" href=\"#\">";
-                                echo $mName;
-                                echo '</a></li>';
-                            }
-                            else {
-                                echo "<li class=\"nav-item monthes\" id=\"{$month}\"><a class=\"nav-link\" href=\"#\">";
-                                echo $mName;
-                                echo '</a></li>';
-                            }
+                    for ($month = 0; $month < 12; $month++) {
+                        $mName = date('F', mktime(0, 0, 0, $month, 10));
+                        if (date('m', time()) == $month) {
+                            echo "<li class=\"nav-item monthes\" id=\"{$month}\"><a class=\"nav-link active\" id=\"{$month}nav\" href=\"#\">";
+                            echo $mName;
+                            echo '</a></li>';
+                        } else {
+                            echo "<li class=\"nav-item monthes\" id=\"{$month}\"><a class=\"nav-link\" id=\"{$month}nav\" href=\"#\">";
+                            echo $mName;
+                            echo '</a></li>';
                         }
+                    }
                     ?>
                 </ul>
             </div>
-            <div class="arrowsRight">
-                <i class="fas fa-angle-double-right fa-3x"></i>
+            <div class="col-1 arrowsRight">
+                <i class="fas fa-angle-double-right fa-3x" style="z-index: 999;"></i>
             </div>
         </div>
-
+        <div id="kalDays"></div>
     </div>
 </div>
 <div class="row">
 
 </div>
+
 </body>
 
 <link rel="script" href="js/bootstrap.bundle.js">
@@ -116,9 +117,19 @@
 </html>
 
 
+<!--suppress JSUnresolvedFunction -->
 <script>
-    function createKal(day, month) {
-        const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+    function clrCalendar() {
+        $("#kalDays").fadeOut(300);
+        document.getElementById('kalDays').childNodes.forEach((node) => {
+            document.getElementById('kalDays').lastElementChild.remove();
+            node.remove();
+        });
+        document.getElementById('kalDays').lastElementChild.remove();
+        document.getElementById('kalDays').lastElementChild.remove();
+    }
+
+    function generateCalendar(day, month) {
         const date = new Date();
         if (day == null || day === 0) day = 1;
         if (month == null || month === 0) {
@@ -126,42 +137,49 @@
                 if (index === date.getMonth()) month = index;
             });
         } else {
-            document.getElementById('kalDays').childNodes.forEach((node, index) => {
-                if (index > 2) {
-                    document.getElementById('kalDays').lastElementChild.remove();
-                    node.remove();
-                }
-            });
-            document.getElementById('kalDays').lastElementChild.remove();
+            clrCalendar();
         }
-
-        for (let y = 0; y < 5; y++) {
+        let oMonth = month;
+        let extraDays = "<div class=\"card-body m-2 p-0 rounded day justify-content-end\" ><h1 class=\"display-4 mb-2 ml-2 outofdays\">";
+        let regDay = "<div class=\"card-body m-2 p-0 rounded day justify-content-end\" ><h1 class=\"display-4 mb-2 ml-2\">";
+        for (let y = 0; y < 6; y++) {
             let row = document.createElement("div");
             row.classList.add('row');
             row.id = 'week' + y;
-            for (let i = 1; i < 8; i++) {
-                if (new Date(Date.UTC(date.getFullYear(), date.getMonth(), day, 0, 0)).getDay() === i - 1 && day <= new Date(Date.UTC(date.getFullYear(), month + 1, 0)).getDate()) {
-                    row.innerHTML += "<div class=\"card-body m-2 p-0 rounded day justify-content-end\" name=\"day\"><h1 class=\"display-4 mb-2 ml-2\">" + day + "</h1></div>\n";
+            for (let i = 0; i < 7; i++) {
+                console.log(day);
+                let dayOfWeek = new Date(Date.UTC(date.getFullYear(), month, day, 0, 0)).getDay();
+                let allDays = new Date(Date.UTC(date.getFullYear(), month + 1, 0)).getDate();
+                if (dayOfWeek === i && day <= allDays) {
+                    if (oMonth === month)
+                        row.innerHTML += regDay + day + "</h1></div>\n";
+                    else
+                        row.innerHTML += extraDays + day + "</h1></div>\n";
                     day++;
                 } else {
-                    row.innerHTML += "<div class=\"card-body m-2 p-0 rounded day justify-content-end\" name=\"day\"><h1 class=\"display-4 mb-2 ml-2\"></h1></div>\n";
+                    if (day >= allDays) {
+                        day = 1;
+                        row.innerHTML += extraDays + day + "</h1></div>\n";
+                        day++;
+                        month++;
+                    } else {
+                        let oDay = new Date(Date.UTC(date.getFullYear(), month, 0)).getDate() - (dayOfWeek) + i + 1;
+                        row.innerHTML += extraDays + oDay + "</h1></div>\n";
+                    }
                 }
             }
             document.getElementById('kalDays').appendChild(row);
+            $("#kalDays").fadeIn(300);
         }
 
-
-        //console.log(document.getElementById('kalDays').childNodes.length);
-        //document.getElementById('kalDays').childNodes.forEach((node)=>{console.log(node);});
     }
 
     function lMenuRedraw(click) {
-        if (click == 0 || $(window).width() < 1500) {
-            //$('#left-side-menu').style.width = '55px';
+        if (click === 0 || $(window).width() < 1500) {
             $('#menuTitle').hide(200);
             $('.menuControls').hide(200);
             document.getElementById('bricks').classList.remove('pl-4');
-        } else if (click == 1 || $(window).width() > 1500) {
+        } else if (click === 1 || $(window).width() > 1500) {
             $('#menuTitle').show(200);
             $('.menuControls').show(200);
             document.getElementById('bricks').classList.add('pl-4');
@@ -175,9 +193,10 @@
 
     function redrawMenu() {
         if ($(window).width() < 1500) {
+            let id = document.getElementsByClassName('nav-link active');
             $("li").each(function (index) {
                 let date = new Date();
-                if (index < date.getMonth() - 1 || index > date.getMonth() + 2) {
+                if (index < date.getMonth() + 1 - 2 || index > date.getMonth() + 1 + 2) {
                     document.getElementById(index).classList.add('d-none');
                 }
             });
@@ -189,17 +208,40 @@
         lMenuRedraw();
     }
 
+    function clrActive(arrow) {
+        let act = document.getElementsByClassName('nav-link active');
+        let id = 0;
+        for (let actKey of act) {
+            if (arrow) id = actKey.id;
+            actKey.classList.remove('active');
+        }
+        return id;
+    }
+
     $(document).ready(function () {
         redrawMenu();
-        createKal();
+        generateCalendar();
         window.addEventListener("resize", redrawMenu);
         $(".monthes").on('click', function (event) {
             event.stopPropagation();
             event.stopImmediatePropagation();
             //(... rest of your JS code)
-            alert(this.id);
-            document.getElementById(this.id).classList.add('active');
-            createKal(0, this.id);
+            clrActive();
+            document.getElementById(this.id + "nav").classList.add('active');
+            generateCalendar(0, this.id - 1);
+        });
+        $(".fa-angle-double-left").on('click', function () {
+            let id = clrActive(true);
+            alert(id);
+            id--;
+            document.getElementById(id + "nav").classList.add('active');
+            generateCalendar(0, id);
+        });
+        $(".fa-angle-double-right").on('click', function () {
+            let id = clrActive(true);
+            id++;
+            document.getElementById(id + "nav").classList.add('active');
+            generateCalendar(0, id);
         });
         let els = document.getElementsByClassName("day");
         [].forEach.call(els, function (el) {

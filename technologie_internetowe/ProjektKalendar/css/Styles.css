@@ -1,4 +1,12 @@
-.menuBrick{
+body, head {
+    min-width: 500px;
+}
+
+li, ul {
+    overflow: hidden;
+}
+
+.menuBrick {
     width: 35px;
     height: 5px;
     background-color: black;
@@ -25,15 +33,22 @@
     background-color: #5dfffc;
 }
 
-.navbar-kalendar {
+.outofdays {
+    -webkit-text-fill-color: grey;
+}
+
+.navbar-calendar {
+    /*overflow: hidden; !important;*/
     height: 3em;
     justify-content: center;
 }
-.kalNavTitle{
+
+.kalNavTitle {
     width: 10rem;
     height: 2rem;
 }
-.arrowsLeft{
+
+.arrowsLeft {
     position: absolute;
     left: 0;
 }
