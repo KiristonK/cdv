@@ -1,0 +1,10 @@
+table, tr, th, td{
+    border: solid thin black;
+    padding: 8px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#name{
+    background-color: cadetblue;
+}
