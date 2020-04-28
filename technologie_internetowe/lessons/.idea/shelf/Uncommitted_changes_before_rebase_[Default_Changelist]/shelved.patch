@@ -1,0 +1,98 @@
+Index: PHP/1_vars.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PHP/1_vars.php	(date 1587481412560)
++++ PHP/1_vars.php	(date 1587481412560)
+@@ -0,0 +1,21 @@
++<?php
++  //heredoc
++$name = "Anna";
++$surname ="Novak";
++echo <<< ETYKIETA
++Dane użytkownika<br>
++Imię: $name<br>Nazwisko: $surname<hr>
++ETYKIETA;
++
++///Imię: Anna
++///Nazwisko: Nowak
++
++//nowdoc
++    $name = "Tadeusz";
++    echo <<< 'E'
++    Imię: $name<br>
++E;
++
++    ///Imię: $name
++
++
+Index: .idea/php.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/php.xml	(date 1587481007040)
++++ .idea/php.xml	(date 1587481007040)
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
++</project>
+\ No newline at end of file
+Index: PHP/2_string.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PHP/2_string.php	(date 1587484419279)
++++ PHP/2_string.php	(date 1587484419279)
+@@ -0,0 +1,48 @@
++<?php
++    $text = <<<TEXT
++    CDV -
++    Collegium
++    Da
++    Vinci<br>
++TEXT;
++    echo $text;
++    echo nl2br($text);
++    //toLowerCase
++    echo strtolower($text);
++    echo strtoupper($text);
++    echo ucfirst(trim(strtolower($text)));
++    echo ucwords(trim(strtolower($text)));
++
++    $lorem = "Make it so.Ahoy, misty captain. you won't fear the galley. ";
++    echo $lorem;
++
++    echo wordwrap($lorem, 10, "<br>");
++    echo wordwrap($lorem, 10, "<hr>");
++
++    //trim
++
++    $name = "   Michel           ";
++    echo "<br>".strlen($name).":".$name;
++    echo "<br>".strlen(ltrim($name)).":".$name;
++    echo "<br>".strlen(rtrim($name)).":".$name;
++    echo "<br>".strlen(trim($name)).":".$name;
++    echo "<br>";
++    //search
++
++    $address = "Poznań, ul. Polna 10, tel. (61) 111 22 33";
++    $find = strstr($address, 'tel');
++    $find1 = stristr($address, 'Tel');
++    $find2 = stristr($address, 'Tel', true);
++    echo $find,"<br>";
++    echo $find1,"<br>";
++    echo $find2,"<br>";
++
++    $surname = substr("Janusz Kowalski", 7, 5);
++    echo $surname;
++
++    //string manipulations
++    $login ="";
++    
++
++
++
