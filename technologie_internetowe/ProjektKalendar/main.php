@@ -27,12 +27,15 @@
     </div>
     <div class="col-5" name="links">
         <nav class="nav nav-pills nav-justified m-2">
-            <a class="nav-item nav-link active" href="#">Home</a>
-            <a class="nav-item nav-link text-light" href="#">Events</a>
-            <a class="nav-item nav-link text-light" href="#">Calendar</a>
+            <a class="nav-item nav-link active" href="#"><i class="fas fa-home fa-2x"></i>
+                Home</a>
+            <a class="nav-item nav-link text-light" href="#">
+                <i class="far fa-calendar-check fa-2x"></i>Events</a>
+            <a class="nav-item nav-link text-light" href="#">
+                <i class="far fa-calendar-alt fa-2x"></i>Calendar</a>
         </nav>
     </div>
-    <div class="col-4" name="search">
+    <div class="col-4 justify-content-center" name="search">
         <div class="row justify-content-end">
             <input type="text" placeholder="Type to search" class="form-control m-2 w-50">
             <input type="button" value="Search" class="btn btn-success mt-2 mb-2 mr-2">
@@ -40,54 +43,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-2 menu w-auto" style="border: 1px solid #000000;" id="left-side-menu">
-        <div class="row">
-            <div class="col" style="width: 100px; overflow: visible;" id="menuTitle">
-                <h4 class="font-weight-light">SCalendar</h4>
-            </div>
-            <div class="col pl-4" id="bricks">
-                <div class="row" id="lMenuHide" style="right: 0">
-                    <div class="col" style="width: 40px;">
-                        <div class="row menuBrick rounded"></div>
-                        <div class="row menuBrick rounded"></div>
-                        <div class="row menuBrick rounded"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row menu-controls">
-            <div class="col" style="border: 1px solid #000000;">
-                <div class="row">
-                    <div class="col-1 mr-2 mb-2">
-                        <i class="fas fa-home fa-2x"></i>
-                    </div>
-                    <div class="col menuControls">
-                        <!--                        <input type="button" class="btn btn-outline-primary m-1" value="Home"><br>-->
-                        <h3 class="font-weight-light">Home</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-1 mr-1 ml-1 mb-2">
-                        <i class="far fa-calendar-check fa-2x"></i>
-                    </div>
-                    <div class="col menuControls">
-                        <!--                        <input type="button" class="btn btn-outline-primary m-1" value="Events"><br>-->
-                        <h3 class="font-weight-light">Events</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-1 mr-1 ml-1 mb-2">
-                        <i class="far fa-calendar-alt fa-2x"></i>
-                    </div>
-                    <div class="col menuControls">
-                        <!--                        <input type="button" class="btn btn-outline-primary m-1" value="Calendar"><br>-->
-                        <h3 class="font-weight-light">Calendar</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-11">
+    <div class="col-12 m-3">
         <div class="row navbar-calendar">
             <div class="col-1 arrowsLeft">
                 <i class="fas fa-angle-double-left fa-3x" style="z-index: 999;"></i>
@@ -116,9 +72,6 @@
         </div>
         <div id="kalDays"></div>
     </div>
-</div>
-<div class="row">
-
 </div>
 
 </body>
@@ -185,22 +138,22 @@
 
     }
 
-    function lMenuRedraw(click) {
-        if (click === 0 || $(window).width() < 1500) {
-            $('#menuTitle').hide(200);
-            $('.menuControls').hide(200);
-            document.getElementById('bricks').classList.remove('pl-4');
-        } else if (click === 1 || $(window).width() > 1500) {
-            $('#menuTitle').show(200);
-            $('.menuControls').show(200);
-            document.getElementById('bricks').classList.add('pl-4');
-            document.getElementById('menuTitle').style.overflow = 'visible';
-        }
-        let els = document.getElementsByClassName("menuControls");
-        [].forEach.call(els, function (el) {
-            el.style.overflow = 'visible';
-        });
-    }
+    // function lMenuRedraw(click) {
+    //     if (click === 0 || $(window).width() < 1500) {
+    //         $('#menuTitle').hide(200);
+    //         $('.menuControls').hide(200);
+    //         document.getElementById('bricks').classList.remove('pl-4');
+    //     } else if (click === 1 || $(window).width() > 1500) {
+    //         $('#menuTitle').show(200);
+    //         $('.menuControls').show(200);
+    //         document.getElementById('bricks').classList.add('pl-4');
+    //         document.getElementById('menuTitle').style.overflow = 'visible';
+    //     }
+    //     let els = document.getElementsByClassName("menuControls");
+    //     [].forEach.call(els, function (el) {
+    //         el.style.overflow = 'visible';
+    //     });
+    // }
 
     function redrawMenu() {
         if ($(window).width() < 1500) {
@@ -216,7 +169,7 @@
                 document.getElementById(index).classList.remove('d-none');
             });
         }
-        lMenuRedraw();
+        // lMenuRedraw();
     }
 
     function clrActive(arrow) {
