@@ -1,5 +1,11 @@
+<!doctype html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>SCalendar</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-grid.css">
@@ -15,17 +21,22 @@
 </head>
 
 <body>
-<!--suppress HtmlFormInputWithoutLabel -->
-<input type="text" hidden value="Month" id="showType"/>
-<div class="row">
-    <div class="col-3" style="border: 1px solid #000000;">
-        <h1 class="font-weight-light">SCalendar</h1>
+<div class="row" style="background-color: #00c0ff">
+    <div class="col-3" name="brand">
+        <h3 class="font-weight-light m-2">SCalendar</h3>
     </div>
-    <div class="col-6" style="border: 1px solid #000000;">
-        <h1 class="display-4">Middle</h1>
+    <div class="col-5" name="links">
+        <nav class="nav nav-pills nav-justified m-2">
+            <a class="nav-item nav-link active" href="#">Home</a>
+            <a class="nav-item nav-link text-light" href="#">Events</a>
+            <a class="nav-item nav-link text-light" href="#">Calendar</a>
+        </nav>
     </div>
-    <div class="col-3" style="border: 1px solid #000000;">
-        <h1 class="display-4">End</h1>
+    <div class="col-4" name="search">
+        <div class="row justify-content-end">
+            <input type="text" placeholder="Type to search" class="form-control m-2 w-50">
+            <input type="button" value="Search" class="btn btn-success mt-2 mb-2 mr-2">
+        </div>
     </div>
 </div>
 <div class="row">

@@ -6,6 +6,10 @@ li, ul {
     overflow: hidden;
 }
 
+.navMenu {
+    background-color: #00c0ff;
+}
+
 .menuBrick {
     width: 35px;
     height: 5px;
