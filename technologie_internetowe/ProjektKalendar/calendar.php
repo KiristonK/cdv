@@ -27,12 +27,6 @@
     </div>
     <div class="col-5" name="links">
         <nav class="nav nav-pills nav-justified m-2">
-            <!--            <a class="nav-item nav-link active" href="#"><i class="fas fa-home fa-2x"></i>-->
-            <!--                Home</a>-->
-            <!--            <a class="nav-item nav-link text-light" href="#">-->
-            <!--                <i class="far fa-calendar-check fa-2x"></i>Events</a>-->
-            <!--            <a class="nav-item nav-link text-light" href="#">-->
-            <!--                <i class="far fa-calendar-alt fa-2x"></i>Calendar</a>-->
             <a class="nav-item nav-link" id="prevYear" href="#"><i class="fa fa-arrow-left"></i></a>
             <a class="nav-item nav-link active" id="year"><?php echo date("Y") ?></a>
             <a class="nav-item nav-link" id="nextYear" href="#"><i class="fa fa-arrow-right"></i></a>
@@ -45,7 +39,7 @@
         </div>
     </div>
 </div>
-<div class="row justify-content-center">
+<div class="row justify-content-center pl-lg-5">
     <div class="col-11">
         <div class="row navbar-calendar">
             <div class="col-1">
@@ -79,26 +73,26 @@ ITEM;
 <div class="row justify-content-center">
     <div class="col-11">
         <div class="row">
-            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
-                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">Su</h1>
+            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
+                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Su</h1>
             </div>
-            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
-                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">Mo</h1>
+            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
+                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Mo</h1>
             </div>
-            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
-                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">Tu</h1>
+            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
+                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Tu</h1>
             </div>
-            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
-                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">We</h1>
+            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
+                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">We</h1>
             </div>
-            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
-                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">Th</h1>
+            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
+                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Th</h1>
             </div>
-            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
-                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">Fr</h1>
+            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
+                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Fr</h1>
             </div>
-            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
-                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">Sa</h1>
+            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
+                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Sa</h1>
             </div>
         </div>
     </div>
@@ -119,7 +113,7 @@ ITEM;
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                No events planned, day is free :)
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
