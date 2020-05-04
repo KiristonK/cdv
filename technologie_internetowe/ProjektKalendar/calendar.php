@@ -147,8 +147,8 @@ ITEM;
         }
         if (year == null || year === 0) year = date.getFullYear();
         let oMonth = month;
-        let extraDays = "<div class=\"card-body m-2 p-0 rounded day justify-content-end\" ><h1 class=\"display-4 mb-2 ml-2 ml-lg-4 pl-lg-5 outofdays\">";
-        let regDay = "<div class=\"card-body m-2 p-0 rounded day justify-content-end\" ><h1 class=\"display-4 mb-2 ml-2 ml-lg-4 pl-lg-5\" data-toggle=\"modal\" data-target=\"#modalEvents\">";
+        let extraDays = "<div class=\"card-body m-2 p-0 rounded day justify-content-end\" ><h1 class=\"display-4 mb-2 ml-2 ml-lg-4 pl-lg-5 outofdays\" style='z-index: -1'>";
+        let regDay = "<div class=\"card-body m-2 p-0 rounded day justify-content-end\" ><h1 class=\"display-4 mb-2 ml-2 ml-lg-4 pl-lg-5\" style='z-index: -1' data-toggle=\"modal\" data-target=\"#modalEvents\">";
         for (let y = 0; y < 6; y++) {
             let row = document.createElement("div");
             row.classList.add('row');
@@ -216,6 +216,15 @@ ITEM;
         window.addEventListener("resize", func => {
             redrawMenu(year)
         });
+        $("#year").on("click", function (e) {
+            let date = new Date();
+            clrActive();
+            document.getElementById((date.getMonth() + 1) + "nav").classList.add('active');
+            generateCalendar(0, date.getMonth(), date.getFullYear());
+            redrawMenu(date.getFullYear());
+            $('#year').text(date.getFullYear());
+        });
+
         $("#prevYear").on('click', function (e) {
             let month = $('.months').find('.active')[0].id.match(/([^nav])/g);
             year = year - 1;
