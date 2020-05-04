@@ -103,10 +103,9 @@ ITEM;
     <div class="col-11 " id="kalDays"></div>
 </div>
 </body>
-
 <div class="modal fade" id="modalEvents" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalEventsTitle">Modal title</h5>
