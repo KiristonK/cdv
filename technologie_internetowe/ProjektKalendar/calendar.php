@@ -8,18 +8,6 @@
 
     <title>SCalendar</title>
 
-    <!---->
-    <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">-->
-    <!--    <link type="text/css" rel="stylesheet"-->
-    <!--          href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/base/jquery-ui.css" media="all"/>-->
-    <!---->
-    <!--    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>-->
-    <!--    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
-    <!---->
-    <!--    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>-->
-    <!--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>-->
-    <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>-->
-
     <link rel="stylesheet" href="css/all.css">
     <link rel="stylesheet" href="css/Styles.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -32,19 +20,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
-<body>
-<div class="row w-100" style="background-color: #00c0ff">
+<body class="col-12">
+<div class="row" style="background-color: #00c0ff">
     <div class="col-3" name="brand">
         <h3 class="font-weight-light m-2">SCalendar</h3>
     </div>
     <div class="col-5" name="links">
         <nav class="nav nav-pills nav-justified m-2">
-            <a class="nav-item nav-link active" href="#"><i class="fas fa-home fa-2x"></i>
-                Home</a>
-            <a class="nav-item nav-link text-light" href="#">
-                <i class="far fa-calendar-check fa-2x"></i>Events</a>
-            <a class="nav-item nav-link text-light" href="#">
-                <i class="far fa-calendar-alt fa-2x"></i>Calendar</a>
+            <!--            <a class="nav-item nav-link active" href="#"><i class="fas fa-home fa-2x"></i>-->
+            <!--                Home</a>-->
+            <!--            <a class="nav-item nav-link text-light" href="#">-->
+            <!--                <i class="far fa-calendar-check fa-2x"></i>Events</a>-->
+            <!--            <a class="nav-item nav-link text-light" href="#">-->
+            <!--                <i class="far fa-calendar-alt fa-2x"></i>Calendar</a>-->
+            <a class="nav-item nav-link" id="prevYear" href="#"><i class="fa fa-arrow-left"></i></a>
+            <a class="nav-item nav-link active" id="year"><?php echo date("Y") ?></a>
+            <a class="nav-item nav-link" id="nextYear" href="#"><i class="fa fa-arrow-right"></i></a>
         </nav>
     </div>
     <div class="col-4" name="search">
@@ -54,40 +45,67 @@
         </div>
     </div>
 </div>
-<div class="row w-100">
-    <div class="col-12 w-100 m-3">
+<div class="row justify-content-center">
+    <div class="col-11">
         <div class="row navbar-calendar">
-            <div class="col-1 m-0 p-0">
+            <div class="col-1">
                 <i class="fas fa-angle-double-left fa-3x" style="z-index: 999;"></i>
             </div>
-            <div class="col-10 mt-2 p-0">
-                <ul class="nav nav-tabs justify-content-between" id="months">
-                    <li class="nav-item" id="prevYear"><a class="nav-link" href="#"><?php echo date("Y") - 1 ?><a/></li>
+            <div class="col-10 mt-2">
+                <ul class="nav nav-tabs" id="months">
                     <?php
+
                     for ($month = 0; $month < 12; $month++) {
                         $mName = date('F', mktime(0, 0, 0, $month, 10));
                         if (date('m', time()) == $month) {
-                            echo "<li class=\"nav-item months\" id=\"{$month}\"><a class=\"nav-link active\" id=\"{$month}nav\" href=\"#\">";
-                            echo $mName;
-                            echo '</a></li>';
+                            echo <<< ITEM
+                                    <li class="nav-item months" id="$month"><a class="nav-link active" id="{$month}nav" href="#">$mName</a></li>
+ITEM;
                         } else {
-                            echo "<li class=\"nav-item months\" id=\"{$month}\"><a class=\"nav-link\" id=\"{$month}nav\" href=\"#\">";
-                            echo $mName;
-                            echo '</a></li>';
+                            echo <<< ITEM
+                                    <li class="nav-item months" id="$month"><a class="nav-link" id="{$month}nav" href="#">$mName</a></li>
+ITEM;
                         }
                     }
                     ?>
-                    <li class="nav-item" id="nextYear"><a class="nav-link" href="#"><?php echo date("Y") + 1 ?><a/></li>
                 </ul>
             </div>
-            <div class="col-1 ml-lg-4 m-0 p-0">
+            <div class="col-1 ml-0 pl-0">
                 <i class="fas fa-angle-double-right fa-3x" style="z-index: 999;"></i>
             </div>
         </div>
-        <div class="col-12" id="kalDays"></div>
     </div>
 </div>
-
+<div class="row justify-content-center">
+    <div class="col-11">
+        <div class="row">
+            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
+                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">Su</h1>
+            </div>
+            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
+                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">Mo</h1>
+            </div>
+            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
+                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">Tu</h1>
+            </div>
+            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
+                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">We</h1>
+            </div>
+            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
+                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">Th</h1>
+            </div>
+            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
+                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">Fr</h1>
+            </div>
+            <div class="card-body m-2 p-0 rounded day bg-secondary justify-content-end">
+                <h1 class="display-4 mb-2 ml-2 ml-lg-4 pl-lg-5">Sa</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-11 " id="kalDays"></div>
+</div>
 </body>
 
 <div class="modal fade" id="modalEvents" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -120,18 +138,13 @@
 <script>
     function clrCalendar() {
         $("#kalDays").fadeOut(300);
-        document.getElementById('kalDays').childNodes.forEach((node) => {
-            document.getElementById('kalDays').lastElementChild.remove();
-            node.remove();
-        });
-        document.getElementById('kalDays').lastElementChild.remove();
-        document.getElementById('kalDays').lastElementChild.remove();
+        document.getElementById('kalDays').innerHTML = "";
     }
 
     function generateCalendar(day, month, year) {
         const date = new Date();
         if (day == null || day === 0) day = 1;
-        if (month == null || month === 0) {
+        if (month == null) {
             $("li").each(function (index) {
                 if (index === date.getMonth()) month = index;
             });
@@ -140,8 +153,8 @@
         }
         if (year == null || year === 0) year = date.getFullYear();
         let oMonth = month;
-        let extraDays = "<div class=\"card-body m-2 p-0 rounded day justify-content-end\" ><h1 class=\"display-4 mb-2 ml-2 outofdays\">";
-        let regDay = "<div class=\"card-body m-2 p-0 rounded day justify-content-end\" ><h1 class=\"display-4 mb-2 ml-2\" data-toggle=\"modal\" data-target=\"#modalEvents\">";
+        let extraDays = "<div class=\"card-body m-2 p-0 rounded day justify-content-end\" ><h1 class=\"display-4 mb-2 ml-2 ml-lg-4 pl-lg-5 outofdays\">";
+        let regDay = "<div class=\"card-body m-2 p-0 rounded day justify-content-end\" ><h1 class=\"display-4 mb-2 ml-2 ml-lg-4 pl-lg-5\" data-toggle=\"modal\" data-target=\"#modalEvents\">";
         for (let y = 0; y < 6; y++) {
             let row = document.createElement("div");
             row.classList.add('row');
@@ -173,19 +186,23 @@
 
     }
 
-    function redrawMenu() {
-        let active = parseInt($('#months').find('.active')[0].id.match(/([^nav])/g));
+    function redrawMenu(year, month) {
+        let active = month;
+        if (month === 0 || month === null)
+            active = ($('#months').find('.active')[0].id.match(/([^nav])/g));
+        active = parseInt(active)
         let months = $("#months").find('.nav-item');
         if ($(window).width() < 1500) {
             months.each(function (index) {
-                console.log(index);
-                if (index < active - 2 || index > active + 2) {
-                    if (index < 12) document.getElementById(index).classList.add('d-none');
+                if (index < active - 3 || index > active + 3) {
+                    document.getElementById(index).classList.add('d-none');
+                } else {
+                    document.getElementById(index).classList.remove('d-none');
                 }
             });
         } else {
             months.each(function (index) {
-                if (index < 12) document.getElementById(index).classList.remove('d-none');
+                document.getElementById(index).classList.remove('d-none');
             });
         }
     }
@@ -195,25 +212,29 @@
         let id = 0;
         if (arrow) id = act[0].id;
         act[0].classList.remove('active');
-        // for (let actKey of act) {
-        //     actKey.classList.remove('active');
-        // }
         return id;
     }
 
     $(document).ready(function () {
-        redrawMenu();
+        let year = new Date().getFullYear();
+        redrawMenu(year, 0);
         generateCalendar();
-        window.addEventListener("resize", redrawMenu);
+        window.addEventListener("resize", func => {
+            redrawMenu(year)
+        });
         $("#prevYear").on('click', function (e) {
             let month = $('.months').find('.active')[0].id.match(/([^nav])/g);
-            let year = new Date().getFullYear() - 1;
+            year = year - 1;
             generateCalendar(0, month - 1, year);
+            redrawMenu(year);
+            $('#year').text(year);
         });
         $("#nextYear").on('click', function (e) {
             let month = $('.months').find('.active')[0].id.match(/([^nav])/g);
-            let year = new Date().getFullYear() + 1;
+            year = year + 1;
             generateCalendar(0, month - 1, year);
+            redrawMenu(year);
+            $('#year').text(year);
         })
         $(".months").on('click', function (event) {
             event.stopPropagation();
@@ -221,19 +242,21 @@
             //(... rest of your JS code)
             clrActive();
             document.getElementById(this.id + "nav").classList.add('active');
-            generateCalendar(0, this.id - 1);
+            generateCalendar(0, this.id - 1, year);
         });
         $(".fa-angle-double-left").on('click', function () {
-            let id = clrActive(true).match(/([^nav])/g);
-            id--;
+            let id = parseInt(clrActive(true).replace("nav", "")) - 1;
+            if (id < 0) id = 11;
             document.getElementById(id + "nav").classList.add('active');
-            generateCalendar(0, id);
+            redrawMenu(year, id);
+            generateCalendar(0, id, year);
         });
         $(".fa-angle-double-right").on('click', function () {
-            let id = clrActive(true).match(/([^nav])/g);
-            id++;
+            let id = parseInt(clrActive(true).replace("nav", "")) + 1;
+            if (id > 11) id = 0;
             document.getElementById(id + "nav").classList.add('active');
-            generateCalendar(0, id);
+            redrawMenu(year, id);
+            generateCalendar(0, id, year);
         });
         let els = document.getElementsByClassName("day");
         [].forEach.call(els, function (el) {
@@ -246,7 +269,7 @@
             let month = $('#months').find('.active')[0].innerHTML;
             let modal = $('#modalEvents');
 
-            modal.find('.modal-title').text("All events on " + caller[0].innerHTML + ", " + month);
+            modal.find('.modal-title').text("All events on " + caller[0].innerHTML + ", " + month + ", " + year);
         })
         $('#lMenuHide').click(function () {
             lMenuRedraw(1);

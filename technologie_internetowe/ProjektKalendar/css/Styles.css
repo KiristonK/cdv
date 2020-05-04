@@ -42,7 +42,8 @@ li, ul {
 }
 
 .navbar-calendar {
-    /*overflow: hidden; !important;*/
+    overflow: hidden;
+!important;
     height: 3em;
     justify-content: center;
 }
