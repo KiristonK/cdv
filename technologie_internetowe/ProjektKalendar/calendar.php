@@ -37,22 +37,21 @@
     <div class="col-4" name="search">
         <div class="row justify-content-end p-0 flex-nowrap">
             <input type="text" placeholder="Find event" style="min-width: 150px;" class="form-control m-2 w-50">
-            <input type="button" value="Find !" class="btn btn-success mt-2 mb-2 mr-2 w-auto">
+            <button type="button" class="btn btn-outline-primary mt-2 mb-2 mr-2 w-auto"><i class="fa fa-search"></i>
+            </button>
             <div class="col justify-content-between text-center">
                 <i class="far fa-user-circle fa-2x v-center"></i>
             </div>
         </div>
     </div>
 </div>
-<div class="row justify-content-center pl-lg-5">
-    <div class="col-12">
-        <div class="row navbar-calendar">
-            <div class="col-1">
-                <i class="fas fa-angle-double-left fa-3x" style="z-index: 999;"></i>
-            </div>
-            <div class="col-10 mt-2 d-table text-center">
-                <ul class="nav nav-tabs text-center" id="months">
-                    <?php
+<div class="row row-cols-11 justify-content-center text-center navbar-calendar">
+    <div class="col-1">
+        <i class="fas fa-angle-double-left fa-3x" style="z-index: 999;"></i>
+    </div>
+    <div class="col-9 col-lg-10 mt-2 d-table">
+        <ul class="nav nav-tabs text-center" id="months">
+            <?php
 
                     for ($month = 0; $month < 12; $month++) {
                         $mName = date('F', mktime(0, 0, 0, $month, 10));
@@ -66,39 +65,26 @@ ITEM;
 ITEM;
                         }
                     }
-                    ?>
-                </ul>
-            </div>
-            <div class="col-1 ml-0 pl-0">
-                <i class="fas fa-angle-double-right fa-3x" style="z-index: 999;"></i>
-            </div>
-        </div>
+            ?>
+        </ul>
+    </div>
+    <div class="col-1 ml-0 pl-0">
+        <i class="fas fa-angle-double-right fa-3x" style="z-index: 999;"></i>
     </div>
 </div>
 <div class="row justify-content-center">
     <div class="col-11">
         <div class="row">
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Su</h1>
-            </div>
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Mo</h1>
-            </div>
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Tu</h1>
-            </div>
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">We</h1>
-            </div>
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Th</h1>
-            </div>
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Fr</h1>
-            </div>
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Sa</h1>
-            </div>
+            <?php
+            $days = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
+            for ($i = 0; $i < 7; $i++) {
+                echo <<< DAYW
+                    <div class="card-body m-2 p-0 rounded bg-transparent text-center" style="width: 5rem;">
+                        <h1 class="font-weight-light" style="cursor: default;">$days[$i]</h1>
+                    </div>
+DAYW;
+            }
+            ?>
         </div>
     </div>
 </div>
@@ -109,7 +95,7 @@ ITEM;
 
 <div class="modal fade" id="modalEvents" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalEventsTitle">Modal title</h5>
@@ -118,11 +104,15 @@ ITEM;
                 </button>
             </div>
             <div class="modal-body">
-                No events planned, day is free :)
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="row">
+                    <div class="col-9 col-sm-7 d-table modalEvents" id="modalEvents"></div>
+                    <div class="col-3 col-sm-5 d-table">
+                        <input type="button" class="btn btn-outline-success w-100 m-2" value="Add event">
+                        <input type="button" class="btn btn-outline-warning w-100 m-2" value="Edit">
+                        <input type="button" class="btn btn-outline-info w-100 m-2" value="Change color">
+                        <input type="button" class="btn btn-outline-danger w-100 m-2" value="Remove event">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

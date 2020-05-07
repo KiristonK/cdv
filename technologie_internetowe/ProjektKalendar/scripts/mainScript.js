@@ -72,13 +72,24 @@ $(document).ready(function () {
         })
     });
     $('#modalEvents').on('show.bs.modal', function (event) {
-        let caller = $(event.relatedTarget);
+        let caller = $(event.relatedTarget)[0];
         let month = $('#months').find('.active')[0].innerHTML;
         let modal = $('#modalEvents');
 
-        modal.find('.modal-title').text("All events on " + caller[0].innerHTML + ", " + month + ", " + year);
+        modal.find('.modal-title').text("All events on " + caller.lastChild.innerHTML + ", " + month + ", " + year);
+        generateModalEvents(modal, caller);
     });
     $('.popover-dismiss').popover({
         trigger: 'focus'
-    })
+    });
+    $(".day .out-of-days").on("click", function (event) {
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        console.log(event);
+        if (parseInt($(this)[0].innerHTML) > 20) {
+            $(".fa-angle-double-left").trigger("click");
+        } else {
+            $(".fa-angle-double-right").trigger("click");
+        }
+    });
 });

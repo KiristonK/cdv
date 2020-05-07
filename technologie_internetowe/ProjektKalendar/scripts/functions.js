@@ -8,8 +8,8 @@ function generateCalendar(day, month, year) {
     } else document.getElementById('kalDays').innerHTML = "";
     if (year == null || year === 0) year = date.getFullYear();
     let oMonth = month;
-    let extraDays = "<div class=\"card-body m-2 p-0 rounded day text-center\" ><a role='button' class=\"display-4 outofdays\" style='z-index: -1' >";
-    let regDay = "<div class=\"card-body m-2 p-0 rounded day text-center\" ><a role='button' class=\"display-4\" style='z-index: -1' data-toggle=\"modal\" data-target=\"#modalEvents\">";
+    let extraDays = "<div class=\"card-body m-2 p-0 rounded day text-center\" ><a role='button' class=\"display-4 out-of-days\" style='z-index: -1' >";
+    let regDay = "<div class=\"card-body m-2 p-0 rounded day text-center\" data-toggle=\"modal\" data-target=\"#modalEvents\"><a role='button' class=\"display-4\" style='z-index: -1'>";
     for (let y = 0; y < 6; y++) {
         let row = document.createElement("div");
         row.classList.add('row');
@@ -67,4 +67,18 @@ function clrActive(arrow) {
     if (arrow) id = act[0].id;
     act[0].classList.remove('active');
     return id;
+}
+
+function generateModalEvents(modal, caller) {
+    let block = modal.find('.modalEvents')[0];
+    block.innerHTML = "";
+    for (let i = 0; i < 12; i++) {
+        let event = document.createElement("DIV");
+        event.classList.add('d-table-row');
+        let cell = document.createElement("DIV");
+        cell.classList.add('d-table-cell', 'w-100')
+        cell.innerHTML = "<input type=\"button\" class=\"btn btn-secondary w-100 m-1\" value=\"Event " + i + "\">";
+        event.appendChild(cell);
+        block.appendChild(event);
+    }
 }
