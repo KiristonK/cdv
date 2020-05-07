@@ -6,6 +6,18 @@ li, ul {
     overflow: hidden;
 }
 
+ul.nav {
+    display: block;
+!important;
+    text-align: center;
+!important;
+}
+
+ul.nav li {
+    display: inline-block;
+!important;
+}
+
 .navMenu {
     background-color: #00c0ff;
 }

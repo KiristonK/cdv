@@ -42,13 +42,13 @@
     </div>
 </div>
 <div class="row justify-content-center pl-lg-5">
-    <div class="col-11">
+    <div class="col-12">
         <div class="row navbar-calendar">
             <div class="col-1">
                 <i class="fas fa-angle-double-left fa-3x" style="z-index: 999;"></i>
             </div>
-            <div class="col-10 mt-2">
-                <ul class="nav nav-tabs" id="months">
+            <div class="col-10 mt-2 d-table text-center">
+                <ul class="nav nav-tabs text-center" id="months">
                     <?php
 
                     for ($month = 0; $month < 12; $month++) {
