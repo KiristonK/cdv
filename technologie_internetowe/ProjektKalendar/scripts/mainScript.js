@@ -77,5 +77,8 @@ $(document).ready(function () {
         let modal = $('#modalEvents');
 
         modal.find('.modal-title').text("All events on " + caller[0].innerHTML + ", " + month + ", " + year);
+    });
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
     })
 });

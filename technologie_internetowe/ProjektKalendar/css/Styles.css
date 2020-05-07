@@ -2,7 +2,15 @@ body, head {
     min-width: 500px;
 }
 
+.v-center {
+    position: relative;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 li, ul {
+    display: flex;
+    flex-wrap: wrap;
     overflow: hidden;
 }
 

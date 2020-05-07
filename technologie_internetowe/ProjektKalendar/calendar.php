@@ -35,9 +35,12 @@
         </nav>
     </div>
     <div class="col-4" name="search">
-        <div class="row justify-content-end p-0">
-            <input type="text" placeholder="Type to search" style="min-width: 150px;" class="form-control m-2 w-50">
-            <input type="button" value="Search" class="btn btn-success mt-2 mb-2 mr-2 w-auto">
+        <div class="row justify-content-end p-0 flex-nowrap">
+            <input type="text" placeholder="Find event" style="min-width: 150px;" class="form-control m-2 w-50">
+            <input type="button" value="Find !" class="btn btn-success mt-2 mb-2 mr-2 w-auto">
+            <div class="col justify-content-between text-center">
+                <i class="far fa-user-circle fa-2x v-center"></i>
+            </div>
         </div>
     </div>
 </div>
