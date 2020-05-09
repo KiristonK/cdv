@@ -45,7 +45,7 @@ function redrawMenu(year, month) {
         active = ($('#months').find('.active')[0].id.match(/([^nav])/g));
     active = parseInt(active)
     let months = $("#months").find('.nav-item');
-    let range = 3, last = active - range, first = active + range;
+    let range = 3;
     if ($(window).width() < 1500) {
         months.each(function (index) {
             if (index < active - range || index > active + range) {
@@ -94,6 +94,5 @@ function changeLabels(els, style) {
         } else {
             el.className = classes.join(" btn-secondary ").trim();
         }
-        console.log(el);
     }
 }
