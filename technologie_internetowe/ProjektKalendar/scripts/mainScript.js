@@ -1,3 +1,7 @@
+$(function() {
+    $('[data-toggle="popover"]').popover()
+});
+
 $(document).ready(function () {
     let year = new Date().getFullYear();
     redrawMenu(year, 0);
@@ -77,11 +81,9 @@ $(document).ready(function () {
         let modal = $('#modalEvents');
 
         modal.find('.modal-title').text("All events on " + caller.lastChild.innerHTML + ", " + month + ", " + year);
-        generateModalEvents(modal, caller);
+        //generateModalEvents(modal, caller);
     });
-    $('.popover-dismiss').popover({
-        trigger: 'focus'
-    });
+
     $(".day .out-of-days").on("click", function (event) {
         event.stopPropagation();
         event.stopImmediatePropagation();

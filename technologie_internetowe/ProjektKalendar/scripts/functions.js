@@ -77,7 +77,12 @@ function generateModalEvents(modal, caller) {
         event.classList.add('d-table-row');
         let cell = document.createElement("DIV");
         cell.classList.add('d-table-cell', 'w-100')
-        cell.innerHTML = "<input type=\"button\" class=\"btn btn-secondary w-100 m-1\" value=\"Event " + i + "\">";
+        cell.innerHTML = "<button class=\"btn btn-secondary w-100 m-1\"  data-container=\"body\"\n" +
+            " data-toggle=\"popover\"\n" +
+            " data-placement=\"top\"\n" +
+            " data-trigger=\"hover\"\n" +
+            " title=\"Popover xd\"\n" +
+            " data-content=\"this is a popover\">Event" + i + "</button>";
         event.appendChild(cell);
         block.appendChild(event);
     }

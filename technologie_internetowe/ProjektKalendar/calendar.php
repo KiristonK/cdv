@@ -105,7 +105,25 @@ DAYW;
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-9 col-sm-7 d-table modalEvents" id="modalEvents"></div>
+                    <div class="col-9 col-sm-7 d-table modalEvents" id="modalEvents">
+                        <?php
+                            require "scripts/connection.php";
+                            for ($i = 0; $i < 12; $i++){
+                                echo <<< EVENT
+                                    <div class="d-table-row">
+                                        <div class="d-table-cell w-100">
+                                            <div class="custom-control custom-checkbox mr-sm-2">
+                                                <input type="checkbox" class="custom-control-input" id="eventCheck$i">
+                                                <label for="eventCheck$i" class="btn btn-secondary w-100 m-1"
+                                             data-toggle="popover" title="Event $i info" data-trigger="hover"
+                                             data-content="Additional info">Event $i</label>
+                                            </div>
+                                        </div>
+                                    </div>
+EVENT;
+                            }
+                        ?>
+                    </div>
                     <div class="col-3 col-sm-5 d-table">
                         <input type="button" class="btn btn-outline-success w-100 m-2" value="Add event">
                         <input type="button" class="btn btn-outline-warning w-100 m-2" value="Edit">
@@ -117,4 +135,11 @@ DAYW;
         </div>
     </div>
 </div>
+
+<!--<div class="popover fade show bs-popover-right" role="tooltip" x-placement="right">-->
+<!--    <div class="arrow" style="top: 34px;"></div>-->
+<!--    <h3 class="popover-header">Popover title</h3>-->
+<!--    <div class="popover-body">Popover body</div>-->
+<!--</div>-->
+
 </html>
