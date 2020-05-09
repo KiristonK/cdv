@@ -108,16 +108,16 @@ DAYW;
                     <div class="col-9 col-sm-7 d-table modalEvents" id="modalEvents">
                         <?php
                             require "scripts/connection.php";
-                            for ($i = 0; $i < 12; $i++){
+                            for ($i = 1; $i <= 12; $i++) {
                                 echo <<< EVENT
                                     <div class="d-table-row">
                                         <div class="d-table-cell w-100">
-                                            <div class="custom-control custom-checkbox mr-sm-2">
+                                            <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="eventCheck$i">
-                                                <label for="eventCheck$i" class="btn btn-secondary w-100 m-1"
-                                             data-toggle="popover" title="Event $i info" data-trigger="hover"
+                                                <label for="eventCheck$i" class="btn btn-secondary w-100 m-1 custom-control-label"
+                                             data-toggle="popover" data-title="Event $i info" data-trigger="hover"
                                              data-content="Additional info">Event $i</label>
-                                            </div>
+                                             </div>
                                         </div>
                                     </div>
 EVENT;
@@ -127,7 +127,16 @@ EVENT;
                     <div class="col-3 col-sm-5 d-table">
                         <input type="button" class="btn btn-outline-success w-100 m-2" value="Add event">
                         <input type="button" class="btn btn-outline-warning w-100 m-2" value="Edit">
-                        <input type="button" class="btn btn-outline-info w-100 m-2" value="Change color">
+                        <select class="w-100 m-2 custom-select" id="changeEvColor">
+                            <option class="bg-light text-dark" selected value="0">Change color to</option>
+                            <option class="dropdown-item bg-light text-danger" value="danger">Red</option>
+                            <option class="dropdown-item bg-light text-secondary" value="secondary">Grey</option>
+                            <option class="dropdown-item bg-light text-success" value="success">Green</option>
+                            <option class="dropdown-item bg-light text-primary" value="primary">Blue</option>
+                            <option class="dropdown-item bg-light text-warning" value="warning">Yellow</option>
+                            <option class="dropdown-item bg-light text-info" value="info">Turquoise</option>
+                            <option class="dropdown-item bg-light" value="0">Your color</option>
+                        </select>
                         <input type="button" class="btn btn-outline-danger w-100 m-2" value="Remove event">
                     </div>
                 </div>
@@ -135,11 +144,4 @@ EVENT;
         </div>
     </div>
 </div>
-
-<!--<div class="popover fade show bs-popover-right" role="tooltip" x-placement="right">-->
-<!--    <div class="arrow" style="top: 34px;"></div>-->
-<!--    <h3 class="popover-header">Popover title</h3>-->
-<!--    <div class="popover-body">Popover body</div>-->
-<!--</div>-->
-
 </html>

@@ -69,21 +69,31 @@ function clrActive(arrow) {
     return id;
 }
 
-function generateModalEvents(modal, caller) {
-    let block = modal.find('.modalEvents')[0];
-    block.innerHTML = "";
-    for (let i = 0; i < 12; i++) {
-        let event = document.createElement("DIV");
-        event.classList.add('d-table-row');
-        let cell = document.createElement("DIV");
-        cell.classList.add('d-table-cell', 'w-100')
-        cell.innerHTML = "<button class=\"btn btn-secondary w-100 m-1\"  data-container=\"body\"\n" +
-            " data-toggle=\"popover\"\n" +
-            " data-placement=\"top\"\n" +
-            " data-trigger=\"hover\"\n" +
-            " title=\"Popover xd\"\n" +
-            " data-content=\"this is a popover\">Event" + i + "</button>";
-        event.appendChild(cell);
-        block.appendChild(event);
+function ordinal_suffix_of(i) {
+    let j = i % 10,
+        k = i % 100;
+    if (j === 1 && k !== 11) {
+        return i + "st";
+    }
+    if (j === 2 && k !== 12) {
+        return i + "nd";
+    }
+    if (j === 3 && k !== 13) {
+        return i + "rd";
+    }
+    return i + "th";
+}
+
+function changeLabels(els, style) {
+    for (let elem of els) {
+        let el = $('label[for="' + elem.id + '"]')[0];
+        const prefix = "btn-";
+        const classes = el.className.split(" ").filter(c => !c.startsWith(prefix));
+        if (parseInt(style) !== 0) {
+            el.className = classes.join(" btn-" + style + " ").trim();
+        } else {
+            el.className = classes.join(" btn-secondary ").trim();
+        }
+        console.log(el);
     }
 }

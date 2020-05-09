@@ -2,6 +2,11 @@ body, head {
     min-width: 500px;
 }
 
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: royalblue;
+}
+
+
 a.display-4 {
     cursor: default;
 }
@@ -82,7 +87,18 @@ ul.nav li {
     left: 0;
 }
 
-.arrowsRight{
+
+.arrowsRight {
     position: absolute;
     right: 0;
+}
+
+.custom-checkbox .custom-control-label::before {
+    top: 25%;
+!important;
+}
+
+.custom-checkbox .custom-control-label::after {
+    top: 25%;
+!important;
 }
