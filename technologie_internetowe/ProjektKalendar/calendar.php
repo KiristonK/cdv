@@ -35,21 +35,23 @@
         </nav>
     </div>
     <div class="col-4" name="search">
-        <div class="row justify-content-end p-0">
-            <input type="text" placeholder="Type to search" style="min-width: 150px;" class="form-control m-2 w-50">
-            <input type="button" value="Search" class="btn btn-success mt-2 mb-2 mr-2 w-auto">
+        <div class="row justify-content-end p-0 flex-nowrap">
+            <input type="text" placeholder="Find event" style="min-width: 150px;" class="form-control m-2 w-50">
+            <button type="button" class="btn btn-outline-primary mt-2 mb-2 mr-2 w-auto"><i class="fa fa-search"></i>
+            </button>
+            <div class="col justify-content-between text-center">
+                <i class="far fa-user-circle fa-2x v-center"></i>
+            </div>
         </div>
     </div>
 </div>
-<div class="row justify-content-center pl-lg-5">
-    <div class="col-11">
-        <div class="row navbar-calendar">
-            <div class="col-1">
-                <i class="fas fa-angle-double-left fa-3x" style="z-index: 999;"></i>
-            </div>
-            <div class="col-10 mt-2">
-                <ul class="nav nav-tabs" id="months">
-                    <?php
+<div class="row row-cols-11 justify-content-center text-center navbar-calendar">
+    <div class="col-1">
+        <i class="fas fa-angle-double-left fa-3x" style="z-index: 999;"></i>
+    </div>
+    <div class="col-9 col-lg-10 mt-2 d-table">
+        <ul class="nav nav-tabs text-center" id="months">
+            <?php
 
                     for ($month = 0; $month < 12; $month++) {
                         $mName = date('F', mktime(0, 0, 0, $month, 10));
@@ -63,39 +65,26 @@ ITEM;
 ITEM;
                         }
                     }
-                    ?>
-                </ul>
-            </div>
-            <div class="col-1 ml-0 pl-0">
-                <i class="fas fa-angle-double-right fa-3x" style="z-index: 999;"></i>
-            </div>
-        </div>
+            ?>
+        </ul>
+    </div>
+    <div class="col-1 ml-0 pl-0">
+        <i class="fas fa-angle-double-right fa-3x" style="z-index: 999;"></i>
     </div>
 </div>
 <div class="row justify-content-center">
     <div class="col-11">
         <div class="row">
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Su</h1>
-            </div>
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Mo</h1>
-            </div>
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Tu</h1>
-            </div>
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">We</h1>
-            </div>
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Th</h1>
-            </div>
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Fr</h1>
-            </div>
-            <div class="card-body m-2 p-0 rounded bg-transparent" style="width: 5rem;">
-                <h1 class="font-weight-light mb-2 ml-2 ml-lg-4 pl-lg-5">Sa</h1>
-            </div>
+            <?php
+            $days = array("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa");
+            for ($i = 0; $i < 7; $i++) {
+                echo <<< DAYW
+                    <div class="card-body m-2 p-0 rounded bg-transparent text-center" style="width: 5rem;">
+                        <h1 class="font-weight-light" style="cursor: default;">$days[$i]</h1>
+                    </div>
+DAYW;
+            }
+            ?>
         </div>
     </div>
 </div>
@@ -114,11 +103,42 @@ ITEM;
                 </button>
             </div>
             <div class="modal-body">
-                No events planned, day is free :)
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="row">
+                    <div class="col-9 col-sm-7 d-table modalEvents" id="modalEvents">
+                        <?php
+                            require "scripts/connection.php";
+                            for ($i = 1; $i <= 12; $i++) {
+                                echo <<< EVENT
+                                    <div class="d-table-row">
+                                        <div class="d-table-cell w-100">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="eventCheck$i">
+                                                <label for="eventCheck$i" class="btn btn-secondary w-100 m-1 custom-control-label"
+                                             data-toggle="popover" data-title="Event $i info" data-trigger="hover"
+                                             data-content="Additional info">Event $i</label>
+                                             </div>
+                                        </div>
+                                    </div>
+EVENT;
+                            }
+                        ?>
+                    </div>
+                    <div class="col-3 col-sm-5 d-table">
+                        <input type="button" class="btn btn-outline-success w-100 m-2" value="Add event">
+                        <input type="button" class="btn btn-outline-warning w-100 m-2" value="Edit">
+                        <select class="w-100 m-2 custom-select" id="changeEvColor">
+                            <option class="bg-light text-dark" selected value="0">Change color to</option>
+                            <option class="dropdown-item bg-light text-danger" value="danger">Red</option>
+                            <option class="dropdown-item bg-light text-secondary" value="secondary">Grey</option>
+                            <option class="dropdown-item bg-light text-success" value="success">Green</option>
+                            <option class="dropdown-item bg-light text-primary" value="primary">Blue</option>
+                            <option class="dropdown-item bg-light text-warning" value="warning">Yellow</option>
+                            <option class="dropdown-item bg-light text-info" value="info">Turquoise</option>
+                            <option class="dropdown-item bg-light" value="0">Your color</option>
+                        </select>
+                        <input type="button" class="btn btn-outline-danger w-100 m-2" value="Remove event">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

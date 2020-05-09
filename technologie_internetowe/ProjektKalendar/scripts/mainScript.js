@@ -1,3 +1,7 @@
+$(function() {
+    $('[data-toggle="popover"]').popover()
+});
+
 $(document).ready(function () {
     let year = new Date().getFullYear();
     redrawMenu(year, 0);
@@ -65,17 +69,44 @@ $(document).ready(function () {
             $("#kalDays").fadeIn('fast');
         });
     });
-    let els = document.getElementsByClassName("day");
-    [].forEach.call(els, function (el) {
-        el.addEventListener("click", function () {
 
-        })
-    });
     $('#modalEvents').on('show.bs.modal', function (event) {
-        let caller = $(event.relatedTarget);
+        let caller = $(event.relatedTarget)[0];
         let month = $('#months').find('.active')[0].innerHTML;
         let modal = $('#modalEvents');
+        // alert(caller.lastChild.innerHTML + month + year);
+        // modal.attr('data-date', caller.lastChild.innerHTML + month + year);
+        // $('#modalEvents label').each(function () {
+        //     $(this).attr('data-content', 'changed by jq');
+        // })
+        modal.find('.modal-title').text("All events on " + ordinal_suffix_of(parseInt(caller.lastChild.innerHTML)) + ", " + month + ", " + year);
+    });
 
-        modal.find('.modal-title').text("All events on " + caller[0].innerHTML + ", " + month + ", " + year);
-    })
+    $('a .dropdown-item').on("click", function (event) {
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        alert($(this));
+    });
+
+    $(".day .out-of-days").on("click", function (event) {
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        console.log(event);
+        if (parseInt($(this)[0].innerHTML) > 20) {
+            $(".fa-angle-double-left").trigger("click");
+        } else {
+            $(".fa-angle-double-right").trigger("click");
+        }
+    });
+
+    $('#changeEvColor').on('change', function (ev) {
+        let initStyle = "w-100 m-2 custom-select ";
+        let addStyle = "text-light bg-";
+        if (parseInt($(this).children(':selected').val()) !== 0) {
+            $(this).attr('class', '').addClass(initStyle + addStyle + $(this).children(':selected').val());
+        } else {
+            $(this).attr('class', '').addClass(initStyle + "bg-light text-dark");
+        }
+        changeLabels($('#modalEvents input[type="checkbox"]:checked'), $(this).children(':selected').val());
+    });
 });
