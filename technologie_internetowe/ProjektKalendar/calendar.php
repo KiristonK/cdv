@@ -53,9 +53,10 @@
         <ul class="nav nav-tabs text-center" id="months">
             <?php
 
-                    for ($month = 0; $month < 12; $month++) {
-                        $mName = date('F', mktime(0, 0, 0, $month, 10));
-                        if (date('m', time()) == $month) {
+                    for ($i = 1; $i < 13; $i++) {
+                        $month = $i - 1;
+                        $mName = date('F', mktime(0, 0, 0, $i, 10));
+                        if (date('m', time()) == $i) {
                             echo <<< ITEM
                                     <li class="nav-item months" id="$month"><a class="nav-link active" id="{$month}nav" href="#">$mName</a></li>
 ITEM;
@@ -104,24 +105,7 @@ DAYW;
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-9 col-sm-7 d-table modalEvents" id="modalEvents">
-                        <?php
-                            require "scripts/connection.php";
-                            for ($i = 1; $i <= 12; $i++) {
-                                echo <<< EVENT
-                                    <div class="d-table-row">
-                                        <div class="d-table-cell w-100">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="eventCheck$i">
-                                                <label for="eventCheck$i" class="btn btn-secondary w-100 m-1 custom-control-label"
-                                             data-toggle="popover" data-title="Event $i info" data-trigger="hover"
-                                             data-content="Additional info">Event $i</label>
-                                             </div>
-                                        </div>
-                                    </div>
-EVENT;
-                            }
-                        ?>
+                    <div class="col-9 col-sm-7 d-table modalEvents" id="modalEventsTable">
                     </div>
                     <div class="col-3 col-sm-5 d-table">
                         <input type="button" class="btn btn-outline-success w-100 m-2" value="Add event">
