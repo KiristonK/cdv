@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../AdminLTE-3.0.4/.idea/AdminLTE-3.0.4.iml" filepath="$PROJECT_DIR$/../AdminLTE-3.0.4/.idea/AdminLTE-3.0.4.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ProjektKalendar/.idea/ProjektKalendar.iml" filepath="$PROJECT_DIR$/../ProjektKalendar/.idea/ProjektKalendar.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/lessons.iml" filepath="$PROJECT_DIR$/.idea/lessons.iml" />
     </modules>
