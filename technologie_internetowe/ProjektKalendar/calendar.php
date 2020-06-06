@@ -109,8 +109,8 @@ DAYW;
                     <div class="col-9 col-sm-7 d-table modalEvents" id="modalEventsTable">
                     </div>
                     <div class="col-3 col-sm-5 d-table">
-                        <input type="button" class="btn btn-outline-success w-100 m-2" value="Add event">
-                        <input type="button" class="btn btn-outline-warning w-100 m-2" value="Edit">
+                        <input type="button" class="btn btn-outline-success w-100 m-2" id="add" value="Add event">
+                        <input type="button" class="btn btn-outline-warning w-100 m-2" id="edit" value="Edit">
                         <select class="w-100 m-2 custom-select" id="changeEvColor">
                             <option class="bg-light text-dark" selected value="0">Change color to</option>
                             <option class="dropdown-item bg-light text-danger" value="danger">Red</option>
@@ -121,7 +121,12 @@ DAYW;
                             <option class="dropdown-item bg-light text-info" value="info">Turquoise</option>
                             <option class="dropdown-item bg-light" value="0">Your color</option>
                         </select>
-                        <input type="button" class="btn btn-outline-danger w-100 m-2" value="Remove event">
+                        <input type="button" class="btn btn-outline-danger w-100 m-2" id="deleteEv" value="Remove event">
+                        <form action="#" method="post" class="d-none w-100 m-2" id="eventDataInput">
+                            <label for="eventDataInput" class="align-content-center" id="formLabel"></label>
+                            <input type="text" name="eventName" class="form form-control mb-2">
+                            <textarea type="text" class="form-control overflow-hidden" name="eventText"></textarea>
+                        </form>
                     </div>
                 </div>
             </div>

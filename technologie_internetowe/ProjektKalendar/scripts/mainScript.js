@@ -5,6 +5,39 @@ $(document).ready(function () {
     window.addEventListener("resize", func => {
         redrawMenu(year)
     });
+    $("#add").on("click", function () {
+        let form = document.getElementById('eventDataInput');
+        form.classList.remove('d-none');
+        $('#formLabel').text("Add Event");
+        form.getElementsByTagName('textarea')[0].value = "";
+        form.getElementsByTagName('input')[0].value = "";
+        form.getElementsByTagName('textarea')[0].placeholder = "Enter event information or some notes, that will help you determine this event.";
+        form.getElementsByTagName('input')[0].placeholder = "Enter event name";
+        /*TODO
+        * ajax to db
+        * sent event info to db, add record to db
+        * */
+    });
+
+    $("#edit").on("click", function () {
+        let form = document.getElementById('eventDataInput');
+        form.classList.remove('d-none');
+        $('#formLabel').text("Add Event");
+        /*TODO
+        * ajax to db
+        * gather info about event
+        * */
+        form.getElementsByTagName('textarea')[0].value = "Event info from db";
+        form.getElementsByTagName('input')[0].value = "Event name from db";
+    });
+
+    $('#deleteEv').on('click', function(){
+        let id = "";
+        /*TODO
+        * remove event from db by it's id
+        * */
+    });
+
     $("#year").on("click", function (e) {
         let date = new Date();
         clrActive();
