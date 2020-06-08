@@ -30,7 +30,7 @@
     <div class="col-5" name="links">
         <nav class="nav nav-pills nav-justified m-2">
             <a class="nav-item nav-link" id="prevYear" href="#"><i class="fa fa-arrow-left"></i></a>
-            <a class="nav-item nav-link active" id="year"><?php echo date("Y") ?></a>
+            <a class="nav-item nav-link active" style="cursor: pointer;" id="year"><?php echo date("Y") ?></a>
             <a class="nav-item nav-link" id="nextYear" href="#"><i class="fa fa-arrow-right"></i></a>
         </nav>
     </div>
@@ -47,7 +47,7 @@
 </div>
 <div class="row row-cols-11 justify-content-center text-center navbar-calendar">
     <div class="col-1">
-        <i class="fas fa-angle-double-left fa-3x" style="z-index: 999;"></i>
+        <i class="fas fa-angle-double-left fa-3x" style="z-index: 999; cursor: pointer;"></i>
     </div>
     <div class="col-9 col-lg-10 mt-2 d-table">
         <ul class="nav nav-tabs text-center" id="months">
@@ -70,7 +70,7 @@ ITEM;
         </ul>
     </div>
     <div class="col-1 ml-0 pl-0">
-        <i class="fas fa-angle-double-right fa-3x" style="z-index: 999;"></i>
+        <i class="fas fa-angle-double-right fa-3x" style="z-index: 999; cursor: pointer;"></i>
     </div>
 </div>
 <div class="row justify-content-center">
