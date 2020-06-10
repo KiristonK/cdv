@@ -14,26 +14,29 @@ $(document).ready(function () {
         name.value = "";
         text.placeholder = "Enter event information or some notes, that will help you determine this event.";
         name.placeholder = "Enter event name";
-        $.ajax()
     });
 
     $("#edit").on("click", function () {
         let form = document.getElementById('eventDataInput');
         form.classList.remove('d-none');
-        $('#formLabel').text("Add Event");
-        /*TODO
-        * ajax to db
-        * gather info about event
-        *
-        * let text;
-        * let name;
-        * */
-        $.ajax()
+        $('#modalTitle').text("Edit Event");
         form.getElementsByTagName('textarea')[0].value = "Event info from db";
         form.getElementsByTagName('input')[0].value = "Event name from db";
     });
 
-    $('#deleteEv').on('click', function(){
+    $("#formSubmit").on("click", function () {
+        let name = $("#evName").val();
+        let description = $("#evDesc").val();
+        let date = $("#evDate").val();
+        let time_start = $("#evTS").val();
+        let time_end = $("#evTE").val();
+        $.ajax({
+            url: "scripts/database_reqs.php",
+            data: {name: name, date: date, description: description, time_start: time_start, time_end: time_end}
+        })
+    })
+
+    $('#deleteEv').on('click', function () {
         let id = "";
         /*TODO
         * remove event from db by it's id

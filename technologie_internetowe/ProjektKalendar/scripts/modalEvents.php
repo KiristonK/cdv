@@ -18,7 +18,7 @@ if ($result = mysqli_query($conn, $sql)) {
             <input type="checkbox" class="custom-control-input" id="eventCheck$i">
             <label for="eventCheck$i" id="labelCheck$i" 
             data-info="$row[event_description]" data-name="$row[event_name]"
-            class="btn btn-secondary w-100 m-1 custom-control-label">$row[event_name] ($day, $month, $year)</label>
+            class="btn btn-secondary w-100 m-1 custom-control-label">$row[event_name] ($date)</label>
         </div>
     </div>
 </div>
