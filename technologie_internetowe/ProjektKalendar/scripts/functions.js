@@ -92,19 +92,22 @@ function resetModal(caller, month) {
     $("#changeEvColor").val(0);
     $("#changeEvColor").trigger("change");
     $.ajax({
-        url: "scripts/modalEvents.php?day="+caller.lastChild.innerHTML+"&month="+month.innerHTML+
-            "&monthNum="+month.id.replace("nav", ""),
+        url: "scripts/modalEvents.php?day=" + caller.lastChild.innerHTML + "&month=" + month.innerHTML +
+            "&monthNum=" + month.id.replace("nav", "") + "&year=" + $('#year').text(),
         type: 'POST',
         success: function (data) {
             $("#modalEventsTable").append(data);
-            for (let i = 1; i <= 12; i++){
-                let elem = $('#labelCheck'+i);
+            let size = document.getElementById('modalEventsTable').childNodes.length;
+            for (let i = 0; i < size; i++) {
+                let elem = $('#labelCheck' + i);
                 elem.popover({
-                    title: "[Event name]",
+                    title: elem.attr("data-name"),
                     content: elem.attr("data-info"),
                     placement: "right",
-                    trigger: 'hover'});
+                    trigger: 'hover'
+                });
                 elem.attr("data-info", "");
+                elem.attr("data-name", "");
             }
         }
     });

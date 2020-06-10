@@ -30,7 +30,7 @@
     <div class="col-5" name="links">
         <nav class="nav nav-pills nav-justified m-2">
             <a class="nav-item nav-link" id="prevYear" href="#"><i class="fa fa-arrow-left"></i></a>
-            <a class="nav-item nav-link active" id="year"><?php echo date("Y") ?></a>
+            <a class="nav-item nav-link active" style="cursor: pointer;" id="year"><?php echo date("Y") ?></a>
             <a class="nav-item nav-link" id="nextYear" href="#"><i class="fa fa-arrow-right"></i></a>
         </nav>
     </div>
@@ -47,7 +47,7 @@
 </div>
 <div class="row row-cols-11 justify-content-center text-center navbar-calendar">
     <div class="col-1">
-        <i class="fas fa-angle-double-left fa-3x" style="z-index: 999;"></i>
+        <i class="fas fa-angle-double-left fa-3x" style="z-index: 999; cursor: pointer;"></i>
     </div>
     <div class="col-9 col-lg-10 mt-2 d-table">
         <ul class="nav nav-tabs text-center" id="months">
@@ -70,7 +70,7 @@ ITEM;
         </ul>
     </div>
     <div class="col-1 ml-0 pl-0">
-        <i class="fas fa-angle-double-right fa-3x" style="z-index: 999;"></i>
+        <i class="fas fa-angle-double-right fa-3x" style="z-index: 999; cursor: pointer;"></i>
     </div>
 </div>
 <div class="row justify-content-center">
@@ -108,8 +108,10 @@ DAYW;
                     <div class="col-9 col-sm-7 d-table modalEvents" id="modalEventsTable">
                     </div>
                     <div class="col-3 col-sm-5 d-table">
-                        <input type="button" class="btn btn-outline-success w-100 m-2" value="Add event">
-                        <input type="button" class="btn btn-outline-warning w-100 m-2" value="Edit">
+                        <input type="button" class="btn btn-outline-success w-100 m-2" id="add" data-toggle="modal"
+                               data-target="#modalEvControl" value="Add event">
+                        <input type="button" class="btn btn-outline-warning w-100 m-2" id="edit" data-toggle="modal"
+                               data-target="#modalEvControl" value="Edit">
                         <select class="w-100 m-2 custom-select" id="changeEvColor">
                             <option class="bg-light text-dark" selected value="0">Change color to</option>
                             <option class="dropdown-item bg-light text-danger" value="danger">Red</option>
@@ -120,11 +122,62 @@ DAYW;
                             <option class="dropdown-item bg-light text-info" value="info">Turquoise</option>
                             <option class="dropdown-item bg-light" value="0">Your color</option>
                         </select>
-                        <input type="button" class="btn btn-outline-danger w-100 m-2" value="Remove event">
+                        <input type="button" class="btn btn-outline-danger w-100 m-2" id="deleteEv"
+                               value="Remove event">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="modal fade" style="z-index: 9999;" id="modalEvControl" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form action="#" method="post" class="w-100 m-2" id="eventDataInput">
+                        <div class="row">
+                            <div class="col">
+                                <label for="evName">Event name</label>
+                                <input type="text" name="eventName" id="evName" class="form form-control mb-2">
+                            </div>
+                            <div class="col">
+                                <label for="evLink">Event link</label>
+                                <input type="text" id="evLink" name="eventLink" class="form form-control mb-2">
+                            </div>
+                        </div>
+                        <label for="evPlace">Event place (address)</label>
+                        <input type="text" id="evPlace" name="eventPlace" class="form form-control mb-2">
+                        <label for="evDate">Event date</label>
+                        <input type="date" id="evDate" name="eventDate" class="form form-control mb-2">
+                        <div class="row">
+                            <div class="col">
+                                <label for="evTS">Start time (from)</label>
+                                <input type="time" id="evTS" name="eventTimeStart" class="form form-control mb-2">
+                            </div>
+                            <div class="col">
+                                <label for="evTE">End time (to)</label>
+                                <input type="time" id="evTE" name="eventTimeEnd" class="form form-control mb-2">
+                            </div>
+                        </div>
+                        <label for="evDesc">Event description</label>
+                        <textarea type="text" class="form form-control overflow-hidden mb-2" name="eventText"
+                                  id="evDesc"></textarea>
+                        <div style="text-align: end;">
+                            <input type="button" class="btn btn-outline-success" id="formSubmit" value="Confirm">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </html>

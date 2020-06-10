@@ -1,10 +1,65 @@
 $(document).ready(function () {
+    let textarea = document.querySelector('textarea');
+
+    textarea.addEventListener('keydown', autosize);
+
+    function autosize(key){
+        if (key.key == "Enter" || key.key == "Backspace") {
+            let el = this;
+            setTimeout(function () {
+                el.style.cssText = 'height:auto; padding:0';
+                el.style.cssText = 'height:' + el.scrollHeight + 'px';
+            }, 0);
+        }
+    }
     let year = new Date().getFullYear();
     redrawMenu(year, 0);
     generateCalendar();
     window.addEventListener("resize", func => {
         redrawMenu(year)
     });
+    $("#add").on("click", function () {
+        let form = document.getElementById('eventDataInput');
+        let text = form.getElementsByTagName('textarea')[0];
+        let name = form.getElementsByTagName('input')[0];
+        $('#modalTitle').text("Add Event");
+        text.value = "";
+        name.value = "";
+        text.placeholder = "Enter event information or some notes, that will help you determine this event.";
+        name.placeholder = "Enter event name";
+    });
+
+    $("#edit").on("click", function () {
+        let form = document.getElementById('eventDataInput');
+        form.classList.remove('d-none');
+        $('#modalTitle').text("Edit Event");
+        form.getElementsByTagName('textarea')[0].value = "Event info from db";
+        form.getElementsByTagName('input')[0].value = "Event name from db";
+    });
+
+    $("#formSubmit").on("click", function () {
+        let name = $("#evName").val();
+        let description = $("#evDesc").val();
+        let date = $("#evDate").val();
+        let time_start = $("#evTS").val();
+        let time_end = $("#evTE").val();
+        $.ajax({
+            type: 'POST',
+            url: "scripts/database_reqs.php",
+            data: {add: true, name: name, date: date, description: description, time_start: time_start, time_end: time_end},
+            success: function (data) {
+                console.log("Succ\n"+data);
+            }
+        });
+    })
+
+    $('#deleteEv').on('click', function () {
+        let id = "";
+        /*TODO
+        * remove event from db by it's id
+        * */
+    });
+
     $("#year").on("click", function (e) {
         let date = new Date();
         clrActive();
