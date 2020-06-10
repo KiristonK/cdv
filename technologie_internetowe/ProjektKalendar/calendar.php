@@ -146,19 +146,35 @@ DAYW;
             <div class="modal-body">
                 <div class="row">
                     <form action="#" method="post" class="w-100 m-2" id="eventDataInput">
-                        <label for="evName">Event name</label>
-                        <input type="text" name="eventName" id="evName" class="form form-control mb-2">
+                        <div class="row">
+                            <div class="col">
+                                <label for="evName">Event name</label>
+                                <input type="text" name="eventName" id="evName" class="form form-control mb-2">
+                            </div>
+                            <div class="col">
+                                <label for="evLink">Event link</label>
+                                <input type="text" id="evLink" name="eventLink" class="form form-control mb-2">
+                            </div>
+                        </div>
+                        <label for="evPlace">Event place (address)</label>
+                        <input type="text" id="evPlace" name="eventPlace" class="form form-control mb-2">
                         <label for="evDate">Event date</label>
                         <input type="date" id="evDate" name="eventDate" class="form form-control mb-2">
-                        <label for="evTS">Start time (from)</label>
-                        <input type="time" id="evTS" name="eventTimeStart" class="form form-control mb-2">
-                        <label for="evTE">End time (to)</label>
-                        <input type="time" id="evTE" name="eventTimeEnd" class="form form-control mb-2">
+                        <div class="row">
+                            <div class="col">
+                                <label for="evTS">Start time (from)</label>
+                                <input type="time" id="evTS" name="eventTimeStart" class="form form-control mb-2">
+                            </div>
+                            <div class="col">
+                                <label for="evTE">End time (to)</label>
+                                <input type="time" id="evTE" name="eventTimeEnd" class="form form-control mb-2">
+                            </div>
+                        </div>
                         <label for="evDesc">Event description</label>
-                        <textarea type="text" class="form-control overflow-hidden mb-2" name="eventText"
+                        <textarea type="text" class="form form-control overflow-hidden mb-2" name="eventText"
                                   id="evDesc"></textarea>
                         <div style="text-align: end;">
-                            <input type="submit" class="btn btn-outline-success" id="formSubmit" value="Confirm">
+                            <input type="button" class="btn btn-outline-success" id="formSubmit" value="Confirm">
                         </div>
                     </form>
                 </div>
