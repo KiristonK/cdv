@@ -16,9 +16,9 @@ if ($result = mysqli_query($conn, $sql)) {
     <div class="d-table-cell w-100">
         <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="eventCheck$i">
-            <label for="eventCheck$i" id="labelCheck$i" 
-            data-info="$row[event_description]" data-name="$row[event_name]"
-            class="btn btn-secondary w-100 m-1 custom-control-label">$row[event_name] ($date)</label>
+            <button id="labelCheck$i" 
+            data-info="$row[event_description]" data-name="$row[event_name]" data-link="$row[event_link]"
+            class="btn btn-secondary w-100 m-1 custom-control-label">$row[event_name] ($date)</button>
         </div>
     </div>
 </div>

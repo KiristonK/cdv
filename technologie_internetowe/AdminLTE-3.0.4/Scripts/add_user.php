@@ -30,6 +30,9 @@ if (!empty($_POST['name']) && !empty($_POST['surname']) && !empty($_POST['email'
   $birthday = $_POST['birthday'];
 
   $city = 1;
+
+  $pass = password_hash($pass, PASSWORD_ARGON2ID);
+
   require_once 'connection.php';
   if ($conn->connect_errno) {
     $_SESSION['error'] = 'Avaria bazy danych';
@@ -40,8 +43,8 @@ if (!empty($_POST['name']) && !empty($_POST['surname']) && !empty($_POST['email'
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("s", $email);
   $stmt->execute();
-  if ($stmt->affected_rows) {
-    $_SESSION['error'] = 'Podany adres mailowy już istnieje';
+  if ($stmt->affected_rows > 0) {
+    $_SESSION['error'] = 'Podany adres mailowy już istnieje'.$email;
     $conn->close();
     $stmt->close();
     ?>
@@ -50,6 +53,7 @@ if (!empty($_POST['name']) && !empty($_POST['surname']) && !empty($_POST['email'
     </script>
     <?php
   } else {
+    $stmt->close();
     $sql = "INSERT INTO `users`(`name`, `surname`, `city_id`, `email`, `password`, `birthday`) VALUES (?,?,?,?,?,?);";
 
     $stmt = $conn->prepare($sql);

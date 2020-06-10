@@ -144,7 +144,7 @@ DAYW;
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form action="#" method="post" class="w-100 m-2" id="eventDataInput">
+                    <form action="./scripts/database_reqs.php?add=true" method="post" class="w-100 m-2" id="eventDataInput">
                         <div class="row">
                             <div class="col">
                                 <label for="evName">Event name</label>
@@ -173,7 +173,7 @@ DAYW;
                         <textarea type="text" class="form form-control overflow-hidden mb-2" name="eventText"
                                   id="evDesc"></textarea>
                         <div style="text-align: end;">
-                            <input type="button" class="btn btn-outline-success" id="formSubmit" value="Confirm">
+                            <input type="submit" class="btn btn-outline-success" id="formSubmit" value="Confirm">
                         </div>
                     </form>
                 </div>

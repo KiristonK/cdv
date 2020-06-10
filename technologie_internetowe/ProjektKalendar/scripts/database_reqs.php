@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "connection.php";
 if (!empty($_POST['add'])) {
     if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['date'])) {
@@ -17,30 +18,23 @@ if (!empty($_POST['add'])) {
         $stmt->execute();
         if ($stmt->affected_rows > 0) {
             $_SESSION['error'] = "Event o takiej nazwie i treści w ten dzień już istnieje.";
-            echo $stmt->affected_rows;
-            ?>
-            <script>
-                history.back();
-            </script>
-            <?php
+            ?><script>history.back();</script><?php
         } else {
+            $stmt->close();
             $uId = 1;
-            $sql = "INSERT INTO `events`(`user_id`, `event_name`, `event_date`, `event_time_start`, `event_time_stop`, `event_description`, `event_link`, `event_place`) VALUES (?,?,?,?,?,?,?,?)";
-            echo $sql;
-            $stmt = $conn->prepare($sql);
+            $sql = "INSERT INTO `events`(`user_id`, `event_name`, `event_date`, `event_time_start`, `event_time_stop`, `event_description`, `event_link`, `event_place`) VALUES (?,?,?,?,?,?,?,?);";
+            if ($stmt = $conn->prepare($sql)){
             $stmt->bind_param('ssssssss', $uId,$name, $date, $timeS, $timeE, $description, $link, $place);
             $stmt->execute();
             if (!empty($stmt->error_list)) {
                 $_SESSION['error'] = "Bląd dodania eventu";
-                ?>
-                <script>
-                    history.back();
-                </script>
-                <?php
+                ?><script>history.back();</script><?php
+            }
+            }else {
+                echo "Prepare error".$stmt->error;
             }
         }
     }
-
 } else if (!empty($_POST['edit'])) {
     if (!empty($_POST['id'])) {
         $id = $_POST['id'];

@@ -99,15 +99,28 @@ function resetModal(caller, month) {
             $("#modalEventsTable").append(data);
             let size = document.getElementById('modalEventsTable').childNodes.length;
             for (let i = 0; i < size; i++) {
-                let elem = $('#labelCheck' + i);
-                elem.popover({
-                    title: elem.attr("data-name"),
-                    content: elem.attr("data-info"),
+                let elem = document.getElementById('labelCheck' + i);
+                let jqElem = $('#labelCheck' + i);
+                let content = '<div class="row m-2">' +
+                    '<div class="col-11">' +
+                    '<div class="row">';
+                if (elem.getAttribute("data-link") != ""){
+                    content +='Link:<a href="'+elem.getAttribute("data-link")+'" class="font-weight-light ml-2">'+elem.getAttribute("data-link")+'</a>'+
+                        '<hr>';
+                }
+                    content += '<p>'+elem.getAttribute("data-info")+'</p>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
+                jqElem.popover({
+                    title: elem.getAttribute("data-name"),
+                    html: true,
+                    content: content,
                     placement: "right",
-                    trigger: 'hover'
+                    trigger: 'focus'
                 });
-                elem.attr("data-info", "");
-                elem.attr("data-name", "");
+                elem.setAttribute("data-info", "");
+                elem.setAttribute("data-name", "");
             }
         }
     });

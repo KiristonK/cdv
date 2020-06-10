@@ -18,11 +18,13 @@ $(document).ready(function () {
     window.addEventListener("resize", func => {
         redrawMenu(year)
     });
-    $("#add").on("click", function () {
+    $("#add").on("click", function (caller) {
         let form = document.getElementById('eventDataInput');
         let text = form.getElementsByTagName('textarea')[0];
         let name = form.getElementsByTagName('input')[0];
         $('#modalTitle').text("Add Event");
+        console.log(caller);
+        $('#evDate').val();
         text.value = "";
         name.value = "";
         text.placeholder = "Enter event information or some notes, that will help you determine this event.";

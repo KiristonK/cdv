@@ -23,14 +23,27 @@
   <div class="login-logo">
     <a href="../../index2.html"><b>Admin</b>LTE</a>
   </div>
-  <!-- /.login-logo -->
+  <?php
+  session_start();
+  if (isset($_GET['register'])){
+    echo <<< SUCCESS
+<div class="info-box bg-success">
+    <span class="info-box-icon"><i class="fa fa-thumbs-up"></i></span>
+    <div class="info-box-content">
+        <h3 class="font-weight-light">Użytkownik dodany</h3>
+</div>
+</div>
+SUCCESS;
+  }
+  unset($_SESSION['error']);
+  ?>
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="../../index3.html" method="post">
+      <form action="./Scripts/login.php" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" class="form-control" placeholder="Email" name="email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -38,7 +51,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" name="pass">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
