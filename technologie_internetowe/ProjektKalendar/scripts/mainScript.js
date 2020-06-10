@@ -9,16 +9,12 @@ $(document).ready(function () {
         let form = document.getElementById('eventDataInput');
         let text = form.getElementsByTagName('textarea')[0];
         let name = form.getElementsByTagName('input')[0];
-        form.classList.remove('d-none');
-        $('#formLabel').text("Add Event");
+        $('#modalTitle').text("Add Event");
         text.value = "";
         name.value = "";
         text.placeholder = "Enter event information or some notes, that will help you determine this event.";
         name.placeholder = "Enter event name";
-        /*TODO
-        * ajax to db
-        * sent event info to db, add record to db
-        * */
+        $.ajax()
     });
 
     $("#edit").on("click", function () {
@@ -32,6 +28,7 @@ $(document).ready(function () {
         * let text;
         * let name;
         * */
+        $.ajax()
         form.getElementsByTagName('textarea')[0].value = "Event info from db";
         form.getElementsByTagName('input')[0].value = "Event name from db";
     });

@@ -109,7 +109,8 @@ DAYW;
                     <div class="col-9 col-sm-7 d-table modalEvents" id="modalEventsTable">
                     </div>
                     <div class="col-3 col-sm-5 d-table">
-                        <input type="button" class="btn btn-outline-success w-100 m-2" id="add" value="Add event">
+                        <input type="button" class="btn btn-outline-success w-100 m-2" id="add" data-toggle="modal"
+                               data-target="#modalAdd" value="Add event">
                         <input type="button" class="btn btn-outline-warning w-100 m-2" id="edit" value="Edit">
                         <select class="w-100 m-2 custom-select" id="changeEvColor">
                             <option class="bg-light text-dark" selected value="0">Change color to</option>
@@ -121,16 +122,44 @@ DAYW;
                             <option class="dropdown-item bg-light text-info" value="info">Turquoise</option>
                             <option class="dropdown-item bg-light" value="0">Your color</option>
                         </select>
-                        <input type="button" class="btn btn-outline-danger w-100 m-2" id="deleteEv" value="Remove event">
-                        <form action="#" method="post" class="d-none w-100 m-2" id="eventDataInput">
-                            <label for="eventDataInput" class="align-content-center" id="formLabel"></label>
-                            <input type="text" name="eventName" class="form form-control mb-2">
-                            <textarea type="text" class="form-control overflow-hidden" name="eventText"></textarea>
-                        </form>
+                        <input type="button" class="btn btn-outline-danger w-100 m-2" id="deleteEv"
+                               value="Remove event">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="modal fade" style="z-index: 9999;" id="modalAdd" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form action="#" method="post" class="w-100 m-2" id="eventDataInput">
+                        <label for="eventDataInput" class="align-content-center" id="formLabel"></label>
+                        <input type="text" name="eventName" class="form form-control mb-2">
+                        <label for="evDate">Event date</label>
+                        <input type="date" id="evDate" name="eventDate" class="form form-control mb-2">
+                        <label for="evTS">Start time (from)</label>
+                        <input type="time" id="evTS" name="eventTimeStart" class="form form-control mb-2">
+                        <label for="evTE">End time (to)</label>
+                        <input type="time" id="evTE" name="eventTimeEnd" class="form form-control mb-2">
+                        <textarea type="text" class="form-control overflow-hidden mb-2" name="eventText"></textarea>
+                        <div style="text-align: end;">
+                            <input type="submit" class="btn btn-outline-success" value="Confirm">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </html>

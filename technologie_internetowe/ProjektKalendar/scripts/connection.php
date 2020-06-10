@@ -1,2 +1,2 @@
 <?php
-$conn = new mysqli();
+$conn = new mysqli('localhost', 'root', '', 'scalendar');
