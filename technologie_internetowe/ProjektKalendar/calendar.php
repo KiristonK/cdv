@@ -111,7 +111,7 @@ DAYW;
                         <input type="button" class="btn btn-outline-success w-100 m-2" id="add" data-toggle="modal"
                                data-target="#modalEvControl" value="Add event">
                         <input type="button" class="btn btn-outline-warning w-100 m-2" id="edit" data-toggle="modal"
-                               data-target="#modalEvControl" value="Edit">
+                               data-target="#modalEvControl" value="Edit event">
                         <select class="w-100 m-2 custom-select" id="changeEvColor">
                             <option class="bg-light text-dark" selected value="0">Change color to</option>
                             <option class="dropdown-item bg-light text-danger" value="danger">Red</option>
@@ -144,7 +144,7 @@ DAYW;
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form action="./scripts/database_reqs.php?add=true" method="post" class="w-100 m-2" id="eventDataInput">
+                    <form action="" method="POST" class="w-100 m-2" id="eventDataInput">
                         <div class="row">
                             <div class="col">
                                 <label for="evName">Event name</label>

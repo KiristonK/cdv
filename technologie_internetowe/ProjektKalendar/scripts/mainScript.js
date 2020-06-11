@@ -18,10 +18,11 @@ $(document).ready(function () {
     window.addEventListener("resize", func => {
         redrawMenu(year)
     });
-    $("#add").on("click", function (caller) {
+    $('#add').on("click", function (caller) {
         let form = document.getElementById('eventDataInput');
-        let text = form.getElementsByTagName('textarea')[0];
-        let name = form.getElementsByTagName('input')[0];
+        form.setAttribute("action", "./scripts/database_reqs.php?add=true");
+        let text = document.getElementById('evDesc');
+        let name = document.getElementById('evName');
         $('#modalTitle').text("Add Event");
         console.log(caller);
         $('#evDate').val();
@@ -32,23 +33,40 @@ $(document).ready(function () {
     });
 
     $("#edit").on("click", function () {
-        let form = document.getElementById('eventDataInput');
-        form.classList.remove('d-none');
-        $('#modalTitle').text("Edit Event");
-        form.getElementsByTagName('textarea')[0].value = "Event info from db";
-        form.getElementsByTagName('input')[0].value = "Event name from db";
+        let id = $('.custom-control-input:checkbox:checked')
+        console.log(id);
+        console.log(id.length);
+        if (id.length > 1) alert("You can not edit multiple events. Choose only one.");
+        else if (id.length != 0) {
+            let form = document.getElementById('eventDataInput');
+            id = id[0].getAttribute('data-id');
+            console.log(id);
+            form.setAttribute("action", "./scripts/database_reqs.php?edit=true");
+            $('#modalTitle').text("Edit Event");
+            $.ajax({
+                type: 'POST',
+                url: "scripts/database_reqs.php",
+                data: {id: id, get: true},
+                success: function (data) {
+                    form.innerHTML = data;
+                }
+            });
+        } else {
+            let form = document.getElementById('eventDataInput');
+            form.innerHTML = "<h1 class='font-weight-light'>No events selected.</h1>"
+        }
     });
 
     $("#formSubmit").on("click", function () {
-        let name = $("#evName").val();
-        let description = $("#evDesc").val();
-        let date = $("#evDate").val();
-        let time_start = $("#evTS").val();
-        let time_end = $("#evTE").val();
+        let name = $("#evName").val();      let description = $("#evDesc").val();
+        let date = $("#evDate").val();      let time_start = $("#evTS").val();
+        let time_end = $("#evTE").val();    let link = $("#evLink").val();
+        let place = $("#evPlace").val();
         $.ajax({
             type: 'POST',
             url: "scripts/database_reqs.php",
-            data: {add: true, name: name, date: date, description: description, time_start: time_start, time_end: time_end},
+            data: {edit: true, name: name, date: date, description: description,
+                time_start: time_start, time_end: time_end, link: link, place: place},
             success: function (data) {
                 console.log("Succ\n"+data);
             }

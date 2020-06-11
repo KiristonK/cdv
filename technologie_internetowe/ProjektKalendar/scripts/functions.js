@@ -87,40 +87,54 @@ function changeLabels(els, style) {
     }
 }
 
+function convertPlace(address) {
+    for (let ch in address) {
+        if (ch == ' ') ch = '+';
+    }
+    return address;
+}
+
 function resetModal(caller, month) {
     $("#modalEventsTable").html("");
-    $("#changeEvColor").val(0);
-    $("#changeEvColor").trigger("change");
+    $("#changeEvColor").val(0);     $("#changeEvColor").trigger("change");
     $.ajax({
-        url: "scripts/modalEvents.php?day=" + caller.lastChild.innerHTML + "&month=" + month.innerHTML +
-            "&monthNum=" + month.id.replace("nav", "") + "&year=" + $('#year').text(),
+        url: "scripts/modalEvents.php",
         type: 'POST',
+        data: {day: caller.lastChild.innerHTML, month: month.innerHTML, monthNum: month.id.replace("nav", ""), year: $('#year').text()},
         success: function (data) {
             $("#modalEventsTable").append(data);
             let size = document.getElementById('modalEventsTable').childNodes.length;
             for (let i = 0; i < size; i++) {
-                let elem = document.getElementById('labelCheck' + i);
-                let jqElem = $('#labelCheck' + i);
-                let content = '<div class="row m-2">' +
-                    '<div class="col-11">' +
-                    '<div class="row">';
-                if (elem.getAttribute("data-link") != ""){
-                    content +='Link:<a href="'+elem.getAttribute("data-link")+'" class="font-weight-light ml-2">'+elem.getAttribute("data-link")+'</a>'+
-                        '<hr>';
-                }
-                    content += '<p>'+elem.getAttribute("data-info")+'</p>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>'
-                jqElem.popover({
-                    title: elem.getAttribute("data-name"),
+                let elem = $('#labelCheck' + i);
+                let content = '<div class="row m-2"><div class="col-11"><div class="row">';
+                if (elem.attr("data-link") !== "")content +='Link:<a href="'+elem.attr("data-link")+'" class="font-weight-light ml-2">'+elem.attr("data-link")+'</a><hr>';
+                if (elem.attr("data-place") !== "")content +='<p>Place: <a href="https://www.google.com/maps/search/?api=1&query='+convertPlace(elem.attr("data-place"))+'">'+elem.attr("data-place")+'</a></p><hr>';
+                if (elem.attr("data-stime") !== "" && elem.attr("data-etime") !== "") content += '<p>From: '+elem.attr("data-stime")+'    To: '+elem.attr("data-etime")+'</p><hr>'
+                else content += '<p>All day</p><br>';
+                content += '<p>'+elem.attr("data-info")+'</p></div></div></div>'
+                elem.popover({
+                    title: elem.attr("data-name"),
                     html: true,
                     content: content,
-                    placement: "right",
-                    trigger: 'focus'
+                    placement: 'top',
+                    trigger: 'manual'
+                }).on('mouseenter', function () {
+                    let _this = this;
+                    $(this).popover('show');
+                    $('.popover').on('mouseleave', function () {
+                        $(_this).popover('hide');
+                    });
+                }).on('mouseleave', function () {
+                    let _this = this;
+                    setTimeout(function () {
+                        if (!$('.popover:hover').length) {
+                            $(_this).popover('hide');
+                        }
+                    }, 300);
                 });
-                elem.setAttribute("data-info", "");
-                elem.setAttribute("data-name", "");
+                elem.attr("data-info", "");
+                elem.attr("data-name", "");
+                elem.attr("data-place", "");
             }
         }
     });
