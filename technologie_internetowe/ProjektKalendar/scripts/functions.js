@@ -88,9 +88,7 @@ function changeLabels(els, style) {
 }
 
 function convertPlace(address) {
-    for (let ch in address) {
-        if (ch == ' ') ch = '+';
-    }
+    for (let ch in address) if (ch == ' ') ch = '+';
     return address;
 }
 
@@ -106,12 +104,12 @@ function resetModal(caller, month) {
             let size = document.getElementById('modalEventsTable').childNodes.length;
             for (let i = 0; i < size; i++) {
                 let elem = $('#labelCheck' + i);
-                let content = '<div class="row m-2"><div class="col-11"><div class="row">';
-                if (elem.attr("data-link") !== "")content +='Link:<a href="'+elem.attr("data-link")+'" class="font-weight-light ml-2">'+elem.attr("data-link")+'</a><hr>';
-                if (elem.attr("data-place") !== "")content +='<p>Place: <a href="https://www.google.com/maps/search/?api=1&query='+convertPlace(elem.attr("data-place"))+'">'+elem.attr("data-place")+'</a></p><hr>';
-                if (elem.attr("data-stime") !== "" && elem.attr("data-etime") !== "") content += '<p>From: '+elem.attr("data-stime")+'    To: '+elem.attr("data-etime")+'</p><hr>'
-                else content += '<p>All day</p><br>';
-                content += '<p>'+elem.attr("data-info")+'</p></div></div></div>'
+                let content = '<div class="col">';
+                if (elem.attr("data-link") !== "")content +='<div class="row">Link:<a href="'+elem.attr("data-link")+'" class="font-weight-light ml-2">'+elem.attr("data-link")+'</a></div>';
+                if (elem.attr("data-place") !== "")content +='<div class="row border-bottom" style="border-color: #d3d3d3;"><p>Place: <a href="https://www.google.com/maps/search/?api=1&query='+convertPlace(elem.attr("data-place"))+'">'+elem.attr("data-place")+'</a></p></div>';
+                if (elem.attr("data-stime") !== "" && elem.attr("data-etime") !== "") content += '<div class="row border-bottom" style="border-color: #d3d3d3;"><p>From: '+elem.attr("data-stime")+'    To: '+elem.attr("data-etime")+'</p></div>'
+                else content += '<div class="row border-bottom" style="border-color: #d3d3d3;"><p>All day</p></div>';
+                content += '<div class="row""><p>'+elem.attr("data-info")+'</p></div></div>'
                 elem.popover({
                     title: elem.attr("data-name"),
                     html: true,
@@ -132,9 +130,8 @@ function resetModal(caller, month) {
                         }
                     }, 300);
                 });
-                elem.attr("data-info", "");
-                elem.attr("data-name", "");
-                elem.attr("data-place", "");
+                elem.attr("data-info", "");elem.attr("data-name", "");elem.attr("data-place", "");
+                elem.attr("data-stime", "");elem.attr("data-etime", "");
             }
         }
     });

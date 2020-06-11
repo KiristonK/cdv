@@ -34,13 +34,10 @@ $(document).ready(function () {
 
     $("#edit").on("click", function () {
         let id = $('.custom-control-input:checkbox:checked')
-        console.log(id);
-        console.log(id.length);
         if (id.length > 1) alert("You can not edit multiple events. Choose only one.");
         else if (id.length != 0) {
             let form = document.getElementById('eventDataInput');
             id = id[0].getAttribute('data-id');
-            console.log(id);
             form.setAttribute("action", "./scripts/database_reqs.php?edit=true");
             $('#modalTitle').text("Edit Event");
             $.ajax({
@@ -48,7 +45,11 @@ $(document).ready(function () {
                 url: "scripts/database_reqs.php",
                 data: {id: id, get: true},
                 success: function (data) {
-                    form.innerHTML = data;
+                    let json = JSON.parse(data);
+                    $("#evName").val(json['name']);      $("#evDesc").val(json['description']);
+                    $("#evDate").val(json['date']);      $("#evTS").val(json['time_stop']);
+                    $("#evTE").val(json['time_start']);    $("#evLink").val(json['link']);
+                    $("#evPlace").val(json['place']);  $("#event_id").val(json['event_id']);
                 }
             });
         } else {
@@ -61,11 +62,12 @@ $(document).ready(function () {
         let name = $("#evName").val();      let description = $("#evDesc").val();
         let date = $("#evDate").val();      let time_start = $("#evTS").val();
         let time_end = $("#evTE").val();    let link = $("#evLink").val();
-        let place = $("#evPlace").val();
+        let place = $("#evPlace").val();    let id = $("#event_id").val();
+        alert(id);
         $.ajax({
             type: 'POST',
-            url: "scripts/database_reqs.php",
-            data: {edit: true, name: name, date: date, description: description,
+            url: document.getElementById('eventDataInput').getAttribute('action'),
+            data: {id: id, name: name, date: date, description: description,
                 time_start: time_start, time_end: time_end, link: link, place: place},
             success: function (data) {
                 console.log("Succ\n"+data);
