@@ -51,7 +51,29 @@ if (!empty($_GET['add'])){
         $stmt->close();
     }
     else {echo "Empty id !";}
-} else if(!empty($_POST['get'])) {
+} else if (!empty($_GET['delete'])) {
+    if (!empty($_POST['id'])){
+        $id = $_POST['id'];
+        ?>
+        <script>
+         alert(id);
+        </script>
+        <?php
+        $sql = "DELETE FROM `events` WHERE `event_id` = ?;";
+        if ($stmt = $conn->prepare($sql)){
+            $stmt->bind_param("ssssssss",$id);
+            $stmt->execute();
+            if (!empty($stmt->error_list)) {
+                $_SESSION['error'] = "Error while saving changes.";
+            }
+        } else {
+            echo "Prepare error";
+        }
+        $stmt->close();
+    }
+    else {echo "Empty id !";}
+}
+ else if(!empty($_POST['get'])) {
     if (!empty($_POST['id'])) {
         $id = $_POST['id'];
         $sql = "select * from `events` where `event_id` = ?";

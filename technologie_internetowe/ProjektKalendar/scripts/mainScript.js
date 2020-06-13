@@ -73,10 +73,18 @@ $(document).ready(function () {
     })
 
     $('#deleteEv').on('click', function () {
-        let id = "";
-        /*TODO
-        * remove event from db by it's id
-        * */
+        let id = $('.custom-control-input:checkbox:checked');
+        id = id[0].getAttribute('data-id');
+        alert(id);
+
+        let form = document.getElementById('eventDataInput');
+        form.setAttribute("action", "./scripts/database_reqs.php?delete=true");
+        
+        $.ajax({
+            type: 'POST',
+            url: "scripts/database_reqs.php",
+            data: {id: id,delete: true}
+        });
     });
 
     $("#year").on("click", function (e) {
