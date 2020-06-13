@@ -144,7 +144,7 @@ DAYW;
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form action="" method="POST" class="w-100 m-2" id="eventDataInput">
+                    <form action="" class="w-100 m-2" id="eventDataInput">
                         <input type="text" hidden name="event_id" id="event_id">
                         <div class="row">
                             <div class="col">
@@ -174,7 +174,7 @@ DAYW;
                         <textarea type="text" class="form form-control overflow-hidden mb-2" name="evDesc"
                                   id="evDesc"></textarea>
                         <div style="text-align: end;">
-                            <input type="submit" class="btn btn-outline-success" id="formSubmit" value="Confirm">
+                            <input type="button" data-dismiss="modal" class="btn btn-outline-success" id="formSubmit" value="Confirm">
                         </div>
                     </form>
                 </div>

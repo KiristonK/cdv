@@ -38,7 +38,7 @@ if (!empty($_GET['add'])){
     if (!empty($_POST['id'])){
         $name = $_POST['name']; $date = $_POST['date']; $description = $_POST['description']; $timeS = $_POST['time_start'];
         $timeE = $_POST['time_end']; $link = $_POST['link']; $place = $_POST['place']; $id = $_POST['id'];
-        $sql = "UPDATE `events` SET `name`=?,`date`=?,`time_start`=?,`time_stop`=?,`description`=?,`link`=?,`place`=? WHERE `event_id` = ?; COMMIT;";
+        $sql = "UPDATE `events` SET `name`=?,`date`= ?,`time_start`=?,`time_stop`=?,`description`=?,`link`=?,`place`=? WHERE `event_id` = ?;";
         if ($stmt = $conn->prepare($sql)){
             $stmt->bind_param("ssssssss", $name, $date, $timeS, $timeE, $description, $link, $place, $id);
             $stmt->execute();
@@ -46,11 +46,11 @@ if (!empty($_GET['add'])){
                 $_SESSION['error'] = "Error while saving changes.";
             }
         } else {
-            echo "Prepare error".$stmt->error;
+            echo "Prepare error";
         }
         $stmt->close();
     }
-    echo "Empty id !";
+    else {echo "Empty id !";}
 } else if(!empty($_POST['get'])) {
     if (!empty($_POST['id'])) {
         $id = $_POST['id'];

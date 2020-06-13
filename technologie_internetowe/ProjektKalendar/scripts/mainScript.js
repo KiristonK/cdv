@@ -68,10 +68,7 @@ $(document).ready(function () {
             type: 'POST',
             url: document.getElementById('eventDataInput').getAttribute('action'),
             data: {id: id, name: name, date: date, description: description,
-                time_start: time_start, time_end: time_end, link: link, place: place},
-            success: function (data) {
-                console.log("Succ\n"+data);
-            }
+                time_start: time_start, time_end: time_end, link: link, place: place}
         });
     })
 
