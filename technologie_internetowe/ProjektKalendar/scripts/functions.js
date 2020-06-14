@@ -2,6 +2,16 @@ String.prototype.splice = function(idx, rem, str) {
     return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
 };
 
+function autosize(key){
+    if (key.key == "Enter" || key.key == "Backspace") {
+        let el = this;
+        setTimeout(function () {
+            el.style.cssText = 'height:auto; padding:0';
+            el.style.cssText = 'height:' + el.scrollHeight + 'px';
+        }, 0);
+    }
+}
+
 function isDatesSame(date1, date2) {
     return date1.getFullYear() === date2.getFullYear() &&
     date1.getMonth() === date2.getMonth() &&
@@ -92,13 +102,13 @@ function convertPlace(address) {
     return address;
 }
 
-function resetModal(caller, month) {
+function resetModal(day, month, monthNum) {
     $("#modalEventsTable").html("");
     $("#changeEvColor").val(0);     $("#changeEvColor").trigger("change");
     $.ajax({
         url: "scripts/modalEvents.php",
         type: 'POST',
-        data: {day: caller.lastChild.innerHTML, month: month.innerHTML, monthNum: month.id.replace("nav", ""), year: $('#year').text()},
+        data: {day: day, month: month, monthNum: monthNum, year: $('#year').text()},
         success: function (data) {
             $("#modalEventsTable").append(data);
             let size = document.getElementById('modalEventsTable').childNodes.length;

@@ -163,7 +163,7 @@ DAYW;
                         <div class="row">
                             <div class="col">
                                 <label for="evTS">Start time (from)</label>
-                                <input type="time" id="evTS" name="evTS" class="form form-control mb-2">
+                                <input type="time" id="evTS" naWme="evTS" class="form form-control mb-2">
                             </div>
                             <div class="col">
                                 <label for="evTE">End time (to)</label>
