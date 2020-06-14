@@ -53,19 +53,19 @@
         <ul class="nav nav-tabs text-center" id="months">
             <?php
 
-                    for ($i = 1; $i < 13; $i++) {
-                        $month = $i - 1;
-                        $mName = date('F', mktime(0, 0, 0, $i, 10));
-                        if (date('m', time()) == $i) {
-                            echo <<< ITEM
+            for ($i = 1; $i < 13; $i++) {
+                $month = $i - 1;
+                $mName = date('F', mktime(0, 0, 0, $i, 10));
+                if (date('m', time()) == $i) {
+                    echo <<< ITEM
                                     <li class="nav-item months" id="$month"><a class="nav-link active" id="{$month}nav" href="#">$mName</a></li>
 ITEM;
-                        } else {
-                            echo <<< ITEM
+                } else {
+                    echo <<< ITEM
                                     <li class="nav-item months" id="$month"><a class="nav-link" id="{$month}nav" href="#">$mName</a></li>
 ITEM;
-                        }
-                    }
+                }
+            }
             ?>
         </ul>
     </div>
@@ -174,7 +174,8 @@ DAYW;
                         <textarea type="text" class="form form-control overflow-hidden mb-2" name="evDesc"
                                   id="evDesc"></textarea>
                         <div style="text-align: end;">
-                            <input type="button" data-dismiss="modal" class="btn btn-outline-success" id="formSubmit" value="Confirm">
+                            <input type="button" data-dismiss="modal" class="btn btn-outline-success" id="formSubmit"
+                                   value="Confirm">
                         </div>
                     </form>
                 </div>
