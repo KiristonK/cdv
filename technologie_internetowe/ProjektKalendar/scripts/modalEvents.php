@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "connection.php";
 $day = $_POST['day'];
 $month = $_POST['month'];
@@ -6,8 +7,9 @@ $monthNum = $_POST['monthNum'];
 $monthNum += 1;
 $year = $_POST['year'];
 $date = $year . "-" . $monthNum . "-" . $day;
+$userid  = $_SESSION['user_id'];
 
-$sql = "select * from `events` where `date` = '{$date}' order by `time_start`";
+$sql = "select * from `events` where `date` = '{$date}' and `user_id` = '{$userid}' order by `time_start`";
 if ($result = mysqli_query($conn, $sql)) {
     $i = 0;
     while ($row = mysqli_fetch_assoc($result)) {
