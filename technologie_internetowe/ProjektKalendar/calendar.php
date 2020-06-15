@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,16 +37,29 @@
             <a class="nav-item nav-link" id="nextYear" href="#"><i class="fa fa-arrow-right"></i></a>
         </nav>
     </div>
+    
     <div class="col-4" name="search">
         <div class="row justify-content-end p-0 flex-nowrap">
             <input type="text" placeholder="Find event" style="min-width: 150px;" class="form-control m-2 w-50">
             <button type="button" class="btn btn-outline-primary mt-2 mb-2 mr-2 w-auto"><i class="fa fa-search"></i>
             </button>
+            
             <div class="col justify-content-between text-center">
-                <i class="far fa-user-circle fa-2x v-center"></i>
+                <a href = "?onClick" style="color: #000000; text-decoration: none;" title="Log out">
+                <i class="far fa-user-circle fa-2x v-center" name = "logOut"></i>
+                <?php
+                    
+                    if(isset($_GET['onClick'])){
+                        unset($_SESSION['RM']);
+                        unset($_SESSION['user_id']);
+                        header("Location: ./Login.php");
+                    }
+                ?>
+                </a>
             </div>
         </div>
     </div>
+    
 </div>
 <div class="row row-cols-11 justify-content-center text-center navbar-calendar">
     <div class="col-1">

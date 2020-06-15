@@ -13,7 +13,7 @@
 </head>
 <body>
     <div id="header"> 
-        <h1>Scalendar</h1> 
+        <h1>SCalendar</h1> 
     </div> 
 
     <div id="LoginDiv">
@@ -23,6 +23,14 @@
             </p>
 
             <?php
+                if(isset($_SESSION['RM'])){
+                    if($_SESSION['RM']){
+                        header("Location: ./calendar.php");   
+                        exit();
+                    }       
+                }
+
+
                 if(isset($_SESSION['TyForReg'])){
                     echo '  <div class="Registered">
                                 <h4>Thank you for register</h4>
@@ -40,15 +48,18 @@
                   <input type="password"name="password" class="formInput" placeholder="Password"required>
                 </div>
                 
-
-                
-                  
                 <div class="Remember">
-                    <input type="checkbox" id="remember">
+                    <input type="checkbox" id="remember" name="remember">
                         <label for="remember">
                             Remember Me
                         </label>
-                    
+                    <?php
+                        if(isset($_POST['remember'])){
+                            $_SESSION['RM']=true;
+                        }else{
+                            $_SESSION['RM']=false;
+                        }
+                    ?>
 
                 </div>
 

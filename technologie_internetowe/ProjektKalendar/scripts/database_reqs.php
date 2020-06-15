@@ -2,6 +2,7 @@
 session_start();
 require_once "connection.php";
 $userid  = $_SESSION['user_id'];
+
 if (!empty($_GET['add'])){
     if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['date'])) {
         $timeE = null;  $name = $_POST['name'];
@@ -73,7 +74,7 @@ if (!empty($_GET['add'])){
  else if(!empty($_POST['get'])) {
     if (!empty($_POST['id'])) {
         $id = $_POST['id'];
-        $sql = "select * from `events` where `event_id` = ? AND `user_id` = '{$userid}'";
+        $sql = "select * from `events` where `event_id` = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $id);
         $stmt->execute();

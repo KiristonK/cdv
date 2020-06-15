@@ -1,6 +1,6 @@
 
 body {
-    background-color: rgb(29, 209, 233);
+    background-color: #00c0ff;
     
 }
 #header{ 
@@ -13,7 +13,7 @@ body {
     background-color: ivory;
     margin-bottom:10px;
     border-bottom:0.5px solid ;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+    
 } 
 h1{
     padding-left: 10px;
@@ -80,11 +80,11 @@ h1{
     border-radius: 7px;
    
     font-size: 12pt;
-    background-color: rgb(29, 209, 233);
+    background-color: #a5ecff ;
 }
 
 .ButtonSignIn:hover{
-    background-color: rgb(29, 226, 233);
+    background-color: #5dfffc ;
 }
 
 .ForgotAndRegister{
