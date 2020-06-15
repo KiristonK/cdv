@@ -37,7 +37,8 @@ if (!empty($_GET['add'])){
             $stmt->close();
         }
     }
-} else if (!empty($_GET['edit'])) {
+}
+else if (!empty($_GET['edit'])) {
     if (!empty($_POST['id'])){
         $name = $_POST['name']; $date = $_POST['date']; $description = $_POST['description']; $timeS = $_POST['time_start'];
         $timeE = $_POST['time_end']; $link = $_POST['link']; $place = $_POST['place']; $id = $_POST['id'];
@@ -54,12 +55,13 @@ if (!empty($_GET['add'])){
         $stmt->close();
     }
     else {echo "Empty id !";}
-} else if (!empty($_GET['delete'])) {
+}
+else if (!empty($_POST['delete'])) {
     if (!empty($_POST['id'])){
         $id = $_POST['id'];
         $sql = "DELETE FROM `events` WHERE `event_id` = ?;";
         if ($stmt = $conn->prepare($sql)){
-            $stmt->bind_param("ssssssss",$id);
+            $stmt->bind_param("s",$id);
             $stmt->execute();
             if (!empty($stmt->error_list)) {
                 $_SESSION['error'] = "Error while saving changes.";

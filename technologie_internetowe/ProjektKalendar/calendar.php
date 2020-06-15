@@ -45,8 +45,9 @@
             </button>
             
             <div class="col justify-content-between text-center">
-                <a href = "?onClick" style="color: #000000; text-decoration: none;" title="Log out">
                 <i class="far fa-user-circle fa-2x v-center" name = "logOut"></i>
+                <a href = "?onClick" style="color: #000000; text-decoration: none;" title="Log out">
+                    <i class="fas fa-sign-out-alt fa-2x v-center" name="LogOut"></i>
                 <?php
                     
                     if(isset($_GET['onClick'])){
