@@ -9,6 +9,7 @@ $year = $_POST['year'];
 $date = $year . "-" . $monthNum . "-" . $day;
 $userid  = $_SESSION['user_id'];
 
+$_SESSION['error'] = "Test error !";
 
 $sql = "select * from `events` where `date` = '{$date}' and `user_id` = '{$userid}' order by `time_start`";
 if ($result = mysqli_query($conn, $sql)) {

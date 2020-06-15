@@ -1,5 +1,6 @@
 <?php
   session_start();
+  if (!isset($_SESSION['user_id'])) header('location: ./Login.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -61,6 +62,15 @@
         </div>
     </div>
     
+</div>
+<div class="row position-absolute w-100" style="z-index: 9999;">
+    <div class="col w-100">
+        <div class="alert alert-danger alert-dismissible fade show " style="left: 61%; width: 40%;">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Error!</strong>
+            <p id="errorText">Error text</p>
+        </div>
+    </div>
 </div>
 <div class="row row-cols-11 justify-content-center text-center navbar-calendar">
     <div class="col-1">

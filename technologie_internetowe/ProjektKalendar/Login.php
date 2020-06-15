@@ -30,7 +30,6 @@
                     }       
                 }
 
-
                 if(isset($_SESSION['TyForReg'])){
                     echo '  <div class="Registered">
                                 <h4>Thank you for register</h4>
