@@ -1,3 +1,8 @@
+<?php
+session_start();
+if (!empty($_SESSION['logged']['name'])) header('location: ./pages/logged/admin.php');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +29,6 @@
     <a href="../../index2.html"><b>Admin</b>LTE</a>
   </div>
   <?php
-  session_start();
   if (isset($_GET['register'])){
     echo <<< SUCCESS
 <div class="info-box bg-success">
@@ -35,7 +39,10 @@
 </div>
 SUCCESS;
   }
-  unset($_SESSION['error']);
+  if (isset($_SESSION['error'])){
+    echo $_SESSION['error'];
+    unset($_SESSION['error']);
+  }
   ?>
   <div class="card">
     <div class="card-body login-card-body">

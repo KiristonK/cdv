@@ -26,14 +26,15 @@
           }
           break;
         case 2:
-          $_SESSION['error'] = "Konto nie jest nieaktywne<br>Enail:".$user['email'];
+          $_SESSION['error'] = "Konto nie jest nieaktywne<br>Email:".$user['email'];
           break;
         case 3:
           $_SESSION['error'] = "Konto nie jest zablokowane !";
           break;
+        default:
+          header('location: ../');
+          break;
       }
-      if ($user['status_id'] == 1) header('location: ../pages/logged/admin.php');
-      else header('location: ../');
     } else {
       $error = 1;
       $_SESSION['error'] = 'Email nie znaleziony';
