@@ -93,9 +93,13 @@ function changeLabels(els, style) {
         let el = $('label[for="' + elem.id + '"]')[0];
         const prefix = "btn-";
         const classes = el.className.split(" ").filter(c => !c.startsWith(prefix));
-        if (parseInt(style) !== 0) {
-            el.className = classes.join(" btn-" + style + " ").trim();
-        } else el.className = classes.join(" btn-secondary ").trim();
+        if (parseInt(style) === 0) { style = 'secondary'; }
+        el.className = classes.join(" btn-" + style + " ").trim();
+        $.ajax({
+            url: './scripts/change_color.php',
+            method: 'POST',
+            data: {ev_id: elem.getAttribute('data-id'), color: style}
+        })
     }
 }
 

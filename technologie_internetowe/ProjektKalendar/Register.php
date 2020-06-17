@@ -36,7 +36,7 @@
     <div class="col-12 d-flex justify-content-center">
         <div class="card w-50"  id="LoginDiv">
             <div class="card-header">
-                <h3 class="font-weight-light" id="SignIn">Sign in</h3>
+                <h3 class="font-weight-light" id="SignIn">Sign Up</h3>
                 <?php
                 if(isset($_SESSION['error'])){
                     echo <<<  ERROR

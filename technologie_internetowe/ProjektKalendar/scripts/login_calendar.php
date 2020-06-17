@@ -2,7 +2,7 @@
 session_start();
 require_once './connection.php';
 
-if (isset($_POST['remember'])) {
+if (isset($_POST['remember']) || !empty($_POST['remember'])) {
     $_SESSION['RM'] = true;
 } else {
     $_SESSION['RM'] = false;
@@ -10,7 +10,7 @@ if (isset($_POST['remember'])) {
 if (!empty($_POST['login']) && !empty($_POST['pass'])){
     $Login = $_POST['login'];
     $Pass = $_POST['pass'];
-    $sql = "select * from `user` where `Login`= '$Login' and `Password`= '$Pass'";
+    $sql = "select * from scalendar.user where `Login`= '$Login' and `Password`= '$Pass'";
 
     if($result = mysqli_query($conn,$sql)){
         $row = mysqli_fetch_assoc($result);

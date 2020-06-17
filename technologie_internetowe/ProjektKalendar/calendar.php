@@ -44,22 +44,23 @@
     
     <div class="col-4 overflow-hidden">
         <div class="row d-flex justify-content-end p-0 text-center">
-            <input type="text" placeholder="Find event" style="min-width: 150px;" class="form-control m-2 w-25">
-            <button type="button" class="btn btn-outline-primary mt-2 mb-2 mr-2 w-auto"><i class="fa fa-search"></i>
-            </button>
-
-            <h4 class="font-weight-light ml-4 mt-2"><?php echo $_SESSION['user']?></h4>
-            <div class="col w-100 d-flex justify-content-end">
+            <div class="col-3 w-auto d-flex justify-content-end">
                 <!--                <i class="far fa-user-circle fa-2x v-center" title="--><!--"></i>-->
+                <input type="text" placeholder="Find event" style="min-width: 150px;" class="form-control m-2 w-auto">
+                <button type="button" class="btn btn-outline-primary mt-2 mb-2 mr-2 w-auto"><i class="fa fa-search"></i>
+                </button>
+                <h4 class="font-weight-light ml-4 mt-2 w-auto"><?php echo $_SESSION['user']?></h4>
+            </div>
+            <div class="col-1">
                 <a href = "?onClick" style="color: #000000; text-decoration: none;" title="Log out">
                     <i class="fas fa-sign-out-alt fa-2x v-center"></i>
-                <?php
+                    <?php
                     if(isset($_GET['onClick'])){
                         unset($_SESSION['RM']);
                         unset($_SESSION['user_id']);
                         header("Location: ./Login.php");
                     }
-                ?>
+                    ?>
                 </a>
             </div>
         </div>

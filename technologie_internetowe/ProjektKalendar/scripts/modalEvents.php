@@ -21,7 +21,7 @@ if ($result = mysqli_query($conn, $sql)) {
             <input type="checkbox" class="custom-control-input" data-id="$row[event_id]" id="eventCheck$i">
             <label id="labelCheck$i"  for="eventCheck$i"
             data-info="$row[description]" data-name="$row[name]" data-link="$row[link]" data-place="$row[place]" data-stime="$row[time_start]" data-etime="$row[time_stop]"
-            class="btn btn-secondary w-100 m-1 custom-control-label">$row[name]</label>
+            class="btn btn-$row[color] w-100 m-1 custom-control-label">$row[name]</label>
         </div>
     </div>
 </div>
