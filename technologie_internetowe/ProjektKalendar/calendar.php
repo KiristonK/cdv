@@ -31,10 +31,10 @@
 </head>
 <body class="col-12">
 <div class="row" style="background-color: #00c0ff">
-    <div class="col-3" name="brand">
+    <div class="col-4" name="brand">
         <h3 class="font-weight-light m-2">SCalendar</h3>
     </div>
-    <div class="col-5" name="links">
+    <div class="col-4" name="links">
         <nav class="nav nav-pills nav-justified m-2">
             <a class="nav-item nav-link" id="prevYear" href="#"><i class="fa fa-arrow-left"></i></a>
             <a class="nav-item nav-link active" style="cursor: pointer;" id="year"><?php echo date("Y") ?></a>
@@ -42,18 +42,18 @@
         </nav>
     </div>
     
-    <div class="col-4" name="search">
-        <div class="row justify-content-end p-0 flex-nowrap">
-            <input type="text" placeholder="Find event" style="min-width: 150px;" class="form-control m-2 w-50">
+    <div class="col-4 overflow-hidden">
+        <div class="row d-flex justify-content-end p-0 text-center">
+            <input type="text" placeholder="Find event" style="min-width: 150px;" class="form-control m-2 w-25">
             <button type="button" class="btn btn-outline-primary mt-2 mb-2 mr-2 w-auto"><i class="fa fa-search"></i>
             </button>
-            
-            <div class="col justify-content-between text-center">
-                <i class="far fa-user-circle fa-2x v-center" name = "logOut"></i>
+
+            <h4 class="font-weight-light ml-4 mt-2"><?php echo $_SESSION['user']?></h4>
+            <div class="col w-100 d-flex justify-content-end">
+                <!--                <i class="far fa-user-circle fa-2x v-center" title="--><!--"></i>-->
                 <a href = "?onClick" style="color: #000000; text-decoration: none;" title="Log out">
-                    <i class="fas fa-sign-out-alt fa-2x v-center" name="LogOut"></i>
+                    <i class="fas fa-sign-out-alt fa-2x v-center"></i>
                 <?php
-                    
                     if(isset($_GET['onClick'])){
                         unset($_SESSION['RM']);
                         unset($_SESSION['user_id']);
@@ -66,15 +66,15 @@
     </div>
     
 </div>
-<div class="row position-absolute w-100" style="z-index: 9999;">
-    <div class="col w-100">
-        <div class="alert alert-danger alert-dismissible fade show " style="left: 61%; width: 40%;">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>Error!</strong>
-            <p id="errorText">Error text</p>
-        </div>
-    </div>
-</div>
+<!--<div class="row position-absolute w-100" style="z-index: 9999;">-->
+<!--    <div class="col w-100">-->
+<!--        <div class="alert alert-danger alert-dismissible fade show " style="left: 61%; width: 40%;">-->
+<!--            <button type="button" class="close" data-dismiss="alert">&times;</button>-->
+<!--            <strong>Error!</strong>-->
+<!--            <p id="errorText">Error text</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <div class="row row-cols-11 justify-content-center text-center navbar-calendar">
     <div class="col-1">
         <i class="fas fa-angle-double-left fa-3x" style="z-index: 999; cursor: pointer;"></i>
@@ -213,3 +213,8 @@ DAYW;
         </div>
     </div>
 </html>
+<script>
+    let year = new Date().getFullYear();
+    redrawMenu(year, 0);
+    generateCalendar();
+</script>

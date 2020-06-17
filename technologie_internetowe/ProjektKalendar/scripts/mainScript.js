@@ -1,21 +1,21 @@
 $(document).ready(function () {
     let textarea = document.querySelector('textarea');
-    textarea.addEventListener('keydown', autosize); //Auto resize for textarea elements
+    if (textarea != null){
+        textarea.addEventListener('keydown', autosize);
+    } //Auto resize for textarea elements
 
-    let year = new Date().getFullYear();
-    redrawMenu(year, 0);
-    generateCalendar();
     window.addEventListener("resize", () => {
         redrawMenu(year)
     });
     $('#add').on("click", function () {
         document.getElementById('eventDataInput')
             .setAttribute("action", "./scripts/database_reqs.php?add=true"); //Set route to php file
+        let date = $('#modalEvents').find('.modal-title').attr('data-date');
         //Reset fields
         let text = document.getElementById('evDesc');
         let name = document.getElementById('evName');
         $('#modalTitle').text("Add Event");
-        $('#evDate').val();
+        $('#evDate').val(date);
         text.value = "";
         text.placeholder = "Enter event information or some notes, that will help you determine this event.";
         name.value = "";
@@ -163,6 +163,7 @@ $(document).ready(function () {
         //Generate title for modal
         modal.find('.modal-title')
             .text("All events on " + ordinal_suffix_of(parseInt(day)) + ", " + month.innerHTML + " " + year);
+        modal.find('.modal-title').attr('data-date',year+'-0'+(parseInt(month.id.replace("nav",""))+1)+'-'+day);
         modal.attr('data-day', day);
         modal.attr('data-month', month.innerHTML);
         modal.attr('data-mNum', month.id.replace("nav", ""));

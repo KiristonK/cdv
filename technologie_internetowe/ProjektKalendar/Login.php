@@ -1,129 +1,114 @@
 <?php
   session_start();
+if(isset($_SESSION['RM'])){
+    if($_SESSION['RM']){
+        header("Location: ./calendar.php");
+        exit();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/LoginForm.css">
-    <title>SCalendar Login
-    </title>
+<!--    <link rel="stylesheet" href="./css/LoginForm.css">-->
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/Styles.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="script" href="js/bootstrap.bundle.js">
+    <link rel="script" href="js/bootstrap.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="scripts/mainScript.js"></script>
+    <script src="scripts/functions.js"></script>
+    <title>SCalendar Sign In</title>
 
 </head>
-<body>
-    <div id="header"> 
-        <h1>SCalendar</h1> 
-    </div> 
-
-    <div id="LoginDiv">
-        <div>
-            <p>
-                <H3 id="SignIn">Sign in</H3>
-            </p>
-
-            <?php
-                if(isset($_SESSION['RM'])){
-                    if($_SESSION['RM']){
-                        header("Location: ./calendar.php");   
-                        exit();
-                    }       
-                }
-
-                if(isset($_SESSION['TyForReg'])){
-                    echo '  <div class="Registered">
-                                <h4>Thank you for register</h4>
-                            </div>';
-                    unset($_SESSION['TyForReg']);
-                }
-            ?>
-
-            <form method="post">
-                <div>
-                  <input type="Login"name="Login" class="formInput" placeholder="Login"required>
-                </div>
-
-                <div>
-                  <input type="password"name="password" class="formInput" placeholder="Password"required>
-                </div>
-                
-                <div class="Remember">
-                    <input type="checkbox" id="remember" name="remember">
-                        <label for="remember">
-                            Remember Me
-                        </label>
+<body class="col-12" style="background-color: #00c0ff; padding-top: 10%;">
+    <div class="row w-100">
+        <div class="col-12 d-flex justify-content-center">
+            <label for="LoginDiv">
+                <h1 class="display-4">SCalendar</h1>
+            </label>
+        </div>
+    </div>
+    <div class="row w-100">
+        <div class="col-12 d-flex justify-content-center">
+            <div class="card w-50"  id="LoginDiv">
+                <div class="card-header">
+                    <h3 class="font-weight-light" id="SignIn">Sign in</h3>
                     <?php
-                        if(isset($_POST['remember'])){
-                            $_SESSION['RM']=true;
-                        }else{
-                            $_SESSION['RM']=false;
-                        }
-                    ?>
-
-                </div>
-
-                  <div>
-                    <input type="submit" name="ButtonSignIn" class="ButtonSignIn" value="Sign in" />
-                    <!-- <button type="submit"class="ButtonSignIn" >Sign In</button> -->
-                    <?php
-
-                    if(isset($_SESSION['error'])){
-                            echo '  <div class="Empty">
-                                <h4>Invalid login or password</h4>
-                            </div>';
-                            unset($_SESSION['error']);
+                    if(isset($_SESSION['TyForReg'])){
+                        echo <<< THANK
+                            <div class="alert alert-success">
+                                    <h5 class="font-weight-light">Thank you for register</h5>
+                            </div>
+THANK;
+                        unset($_SESSION['TyForReg']);
                     }
-
-
-                    //проверка на нажатие кнопки входа
-                        if(isset($_POST['ButtonSignIn'])){
-                            //конект с DB
-                            require_once './scripts/connection.php';
-                            $Login = $_POST['Login'];
-                            $Pass = $_POST['password'];
-
-                            $sql = "SELECT * from `user` where `Login`= '$Login' and `Password`= '$Pass'";
-
-                            if($result = mysqli_query($conn,$sql)){
-                                $row = mysqli_fetch_assoc($result);
-                                if(empty($row)){
-                                    //аккаун не существует или пароль или логин введены неверно 
-                                    $_SESSION['error']="InvalidPassOrLog";
-                                    ?>
-                                        <script>
-                                            history.back();
-                                        </script>
-                                    <?php
-
-
-                                }else{
-                                    echo 'ok';
-                                    $_SESSION['user_id']= $row['id'];
-                                    header("Location: ./calendar.php");
-                                    //аккаун существует перенапровление на гланую
-                                }
-                            }else{
-                                echo 'Error';
-                            }
-
-                        }
+                    if(isset($_SESSION['error'])){
+                        echo <<<  ERROR
+                            <div class="alert alert-danger">
+                                    <h5 class="font-weight-light">$_SESSION[error]</h5>
+                            </div>
+ERROR;
+                        unset($_SESSION['error']);
+                    }
                     ?>
-                  </div>
-                
-                  <div class="ForgotAndRegister">
-                      <a href="">Forgot password</a>
-                      -
-                      <a href="">Forgot Login</a>
-                  </div>
+                </div>
+                <div class="card-body">
+                    <form action="./scripts/login_calendar.php" method="post">
+                       <label for="login" class="form-check-label">Login</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Login" id="login" name="login" required>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <label for="password" class="form-check-label">Password</label>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control" placeholder="Password" id="password" name="pass" required>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="icheck-primary">
+                                    <input type="checkbox" id="remember">
+                                    <label for="remember">
+                                        Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="ForgotAndRegister">
+                            <a href="">Forgot password</a>
+                            -
+                            <a href="">Forgot Login</a>
+                        </div>
 
-                  <div class="ForgotAndRegister">
-                    First time here? 
-                    <a href="./Register.php"> Sing up</a>
-                  </div>
-
-
-            </form>
-
+                        <div class="ForgotAndRegister">
+                            First time here?
+                            <a href="./Register.php"> Sing up</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </body>
