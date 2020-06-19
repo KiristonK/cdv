@@ -43,18 +43,18 @@
             <a class="nav-item nav-link w-100 ml-sm-3 ml-md-5 mr-lg-5" id="nextYear" href="#"><i class="fa fa-arrow-right"></i></a>
         </nav>
     </div>
-<!--    d-flex justify-content-end p-0 text-center-->
-<!--    -3 w-100 d-flex justify-content-end-->
     <div class="col-md-4 col-sm-6 m-0">
-        <div class="row">
-            <div class="col-md-5 col-sm-3 mr-0 d-inline-flex">
+        <div class="row w-100">
+            <div class="col-md-5 col-sm-3 mr-0 pr-0 pl-0 d-inline-flex">
                 <input type="text" placeholder="Find event" class="form-control w-100 ml-0 mr-0 mt-2 mb-2" id="search">
                 <button class="btn btn-outline-primary ml-0 mt-2 mb-2" type="button">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
-            <div class="col-md-7 col-sm-9 d-inline-flex justify-content-start ml-0">
-                <h4 class="font-weight-light ml-4 mt-2 mr-2"><?php echo $_SESSION['user']?></h4>
+            <div class="col-md-6 col-sm-8 d-inline-flex justify-content-start ml-0 mr-0">
+                <h4 class="font-weight-light ml-4 mt-2"><?php echo $_SESSION['user']?></h4>
+            </div>
+            <div class="col-md-1 col-sm-1 pl-0 ml-0 d-inline-flex">
                 <a href = "?onClick" class="text-danger text-decoration-none" title="Log out">
                     <i class="fas fa-sign-out-alt fa-2x v-center ml-3"></i>
                     <?php
