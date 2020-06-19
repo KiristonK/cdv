@@ -1,10 +1,10 @@
 <?php
   session_start();
-if(isset($_SESSION['RM'])){
+  if(isset($_SESSION['RM'])){
     if($_SESSION['RM']){
         header("Location: ./calendar.php");
         exit();
-    }
+  }
 }
 ?>
 <!DOCTYPE html>

@@ -28,32 +28,35 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="scripts/mainScript.js"></script>
     <script src="scripts/functions.js"></script>
+    <script src="scripts/alterClass_pugin.js"></script>
+    <script src="scripts/alerts.js"></script>
 </head>
 <body class="col-12">
 <div class="row" style="background-color: #00c0ff">
-    <div class="col-4" name="brand">
+    <div class="col-2" name="brand">
         <h3 class="font-weight-light m-2">SCalendar</h3>
     </div>
-    <div class="col-4" name="links">
+    <div class="col-md-6 col-sm-4 m-0" name="links">
         <nav class="nav nav-pills nav-justified m-2">
-            <a class="nav-item nav-link" id="prevYear" href="#"><i class="fa fa-arrow-left"></i></a>
+            <a class="nav-item nav-link w-100 mr-sm-3 mr-md-5 mr-lg-5" id="prevYear" href="#"><i class="fa fa-arrow-left"></i></a>
             <a class="nav-item nav-link active" style="cursor: pointer;" id="year"><?php echo date("Y") ?></a>
-            <a class="nav-item nav-link" id="nextYear" href="#"><i class="fa fa-arrow-right"></i></a>
+            <a class="nav-item nav-link w-100 ml-sm-3 ml-md-5 mr-lg-5" id="nextYear" href="#"><i class="fa fa-arrow-right"></i></a>
         </nav>
     </div>
-    
-    <div class="col-4 overflow-hidden">
-        <div class="row d-flex justify-content-end p-0 text-center">
-            <div class="col-3 w-auto d-flex justify-content-end">
-                <!--                <i class="far fa-user-circle fa-2x v-center" title="--><!--"></i>-->
-                <input type="text" placeholder="Find event" style="min-width: 150px;" class="form-control m-2 w-auto">
-                <button type="button" class="btn btn-outline-primary mt-2 mb-2 mr-2 w-auto"><i class="fa fa-search"></i>
+<!--    d-flex justify-content-end p-0 text-center-->
+<!--    -3 w-100 d-flex justify-content-end-->
+    <div class="col-md-4 col-sm-6 m-0">
+        <div class="row">
+            <div class="col-md-5 col-sm-3 mr-0 d-inline-flex">
+                <input type="text" placeholder="Find event" class="form-control w-100 ml-0 mr-0 mt-2 mb-2" id="search">
+                <button class="btn btn-outline-primary ml-0 mt-2 mb-2" type="button">
+                    <i class="fa fa-search"></i>
                 </button>
-                <h4 class="font-weight-light ml-4 mt-2 w-auto"><?php echo $_SESSION['user']?></h4>
             </div>
-            <div class="col-1">
-                <a href = "?onClick" style="color: #000000; text-decoration: none;" title="Log out">
-                    <i class="fas fa-sign-out-alt fa-2x v-center"></i>
+            <div class="col-md-7 col-sm-9 d-inline-flex justify-content-start ml-0">
+                <h4 class="font-weight-light ml-4 mt-2 mr-2"><?php echo $_SESSION['user']?></h4>
+                <a href = "?onClick" class="text-danger text-decoration-none" title="Log out">
+                    <i class="fas fa-sign-out-alt fa-2x v-center ml-3"></i>
                     <?php
                     if(isset($_GET['onClick'])){
                         unset($_SESSION['RM']);
@@ -67,15 +70,14 @@
     </div>
     
 </div>
-<!--<div class="row position-absolute w-100" style="z-index: 9999;">-->
-<!--    <div class="col w-100">-->
-<!--        <div class="alert alert-danger alert-dismissible fade show " style="left: 61%; width: 40%;">-->
-<!--            <button type="button" class="close" data-dismiss="alert">&times;</button>-->
-<!--            <strong>Error!</strong>-->
-<!--            <p id="errorText">Error text</p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div class="row position-absolute w-100" id="alert_div" style="z-index: 9999; display: none;">
+    <div class="col w-100">
+        <div class="alert alert-danger fade show" id="alert_body" style="left: 61%; width: 40%;">
+            <strong id="alert_title"></strong>
+            <p id="info_text"></p>
+        </div>
+    </div>
+</div>
 <div class="row row-cols-11 justify-content-center text-center navbar-calendar">
     <div class="col-1">
         <i class="fas fa-angle-double-left fa-3x" style="z-index: 999; cursor: pointer;"></i>
@@ -141,8 +143,7 @@ DAYW;
                     <div class="col-3 col-sm-5 d-table">
                         <input type="button" class="btn btn-outline-success w-100 m-2" id="add" data-toggle="modal"
                                data-target="#modalEvControl" value="Add event">
-                        <input type="button" class="btn btn-outline-warning w-100 m-2" id="edit" data-toggle="modal"
-                               data-target="#modalEvControl" value="Edit event">
+                        <input type="button" class="btn btn-outline-warning w-100 m-2" id="edit" value="Edit event">
                         <select class="w-100 m-2 custom-select" id="changeEvColor">
                             <option class="bg-light text-dark" selected value="0">Change color to</option>
                             <option class="dropdown-item bg-light text-danger" value="danger">Red</option>
@@ -151,7 +152,6 @@ DAYW;
                             <option class="dropdown-item bg-light text-primary" value="primary">Blue</option>
                             <option class="dropdown-item bg-light text-warning" value="warning">Yellow</option>
                             <option class="dropdown-item bg-light text-info" value="info">Turquoise</option>
-                            <option class="dropdown-item bg-light" value="0">Your color</option>
                         </select>
                         <input type="button" class="btn btn-outline-danger w-100 m-2" id="deleteEv"
                                value="Remove event">
@@ -180,29 +180,29 @@ DAYW;
                         <div class="row">
                             <div class="col">
                                 <label for="evName">Event name</label>
-                                <input type="text" name="evName" id="evName" class="form form-control mb-2">
+                                <input type="text" name="evName" id="evName" placeholder="Enter event name" class="form form-control mb-2" required>
                             </div>
                             <div class="col">
                                 <label for="evLink">Event link</label>
-                                <input type="text" id="evLink" name="evLink" class="form form-control mb-2">
+                                <input type="text" id="evLink" name="evLink" placeholder="Enter event link, if any" class="form form-control mb-2">
                             </div>
                         </div>
                         <label for="evPlace">Event place (address)</label>
-                        <input type="text" id="evPlace" name="evPlace" class="form form-control mb-2">
+                        <input type="text" id="evPlace" name="evPlace" placeholder="Enter event address, if any" class="form form-control mb-2">
                         <label for="evDate">Event date</label>
-                        <input type="date" id="evDate" name="evDate" class="form form-control mb-2">
+                        <input type="date" id="evDate" name="evDate" class="form form-control mb-2" required>
                         <div class="row">
                             <div class="col">
                                 <label for="evTS">Start time (from)</label>
-                                <input type="time" id="evTS" naWme="evTS" class="form form-control mb-2">
+                                <input type="time" id="evTS" name="evTS" class="form form-control mb-2" >
                             </div>
                             <div class="col">
                                 <label for="evTE">End time (to)</label>
-                                <input type="time" id="evTE" name="evTE" class="form form-control mb-2">
+                                <input type="time" id="evTE" name="evTE" class="form form-control mb-2" >
                             </div>
                         </div>
                         <label for="evDesc">Event description</label>
-                        <textarea type="text" class="form form-control overflow-hidden mb-2" name="evDesc"
+                        <textarea type="text" class="form form-control overflow-hidden mb-2" placeholder="Enter event information or some notes, that will help you determine this event." name="evDesc"
                                   id="evDesc"></textarea>
                         <div style="text-align: end;">
                             <input type="button" data-dismiss="modal" class="btn btn-outline-success" id="formSubmit"

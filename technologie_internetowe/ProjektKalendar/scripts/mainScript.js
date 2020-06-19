@@ -1,31 +1,29 @@
 $(document).ready(function () {
     let textarea = document.querySelector('textarea');
-    if (textarea != null){
+    if (textarea != null){ //Auto resize for textarea elements, if any exists
         textarea.addEventListener('keydown', autosize);
-    } //Auto resize for textarea elements
+    }
 
     window.addEventListener("resize", () => {
-        redrawMenu(year)
+        redrawMenu(year);
     });
     $('#add').on("click", function () {
         document.getElementById('eventDataInput')
             .setAttribute("action", "./scripts/database_reqs.php?add=true"); //Set route to php file
         let date = $('#modalEvents').find('.modal-title').attr('data-date');
         //Reset fields
-        let text = document.getElementById('evDesc');
-        let name = document.getElementById('evName');
+        document.getElementById('evDesc').value = "";
+        document.getElementById('evName').value = "";
         $('#modalTitle').text("Add Event");
         $('#evDate').val(date);
-        text.value = "";
-        text.placeholder = "Enter event information or some notes, that will help you determine this event.";
-        name.value = "";
-        name.placeholder = "Enter event name";
     });
 
     $("#edit").on("click", function () {
         let id = $('.custom-control-input:checkbox:checked'); //Get all checked checkboxes on page
-        if (id.length > 1) alert("You can not edit multiple events. Choose only one.");
-        else if (id.length !== 0) {
+        if (id.length === 1) {
+            // data-toggle="modal"
+            // data-target="#modalEvControl"
+            $('#modalEvControl').modal();
             document.getElementById('eventDataInput')
                 .setAttribute("action", "./scripts/database_reqs.php?edit=true"); //Set route to php file
             id = id[0].getAttribute('data-id'); //Get id from checked checkbox
@@ -47,9 +45,11 @@ $(document).ready(function () {
                     $("#event_id").val(json['event_id']);
                 }
             });
-        } else {
-            let form = document.getElementById('eventDataInput');
-            form.innerHTML = "<h1 class='font-weight-light'>No events selected.</h1>"
+        } else if (id.length > 1) {
+            Alerts.danger("You can not edit multiple events. Choose only one.", "","Error");
+        }
+        else {
+            Alerts.danger("No events are selected.", "", "Error");
         }
     });
 
@@ -69,26 +69,39 @@ $(document).ready(function () {
             data: {
                 id: id, name: name, date: date, description: description,
                 time_start: time_start, time_end: time_end, link: link, place: place
-            } //Send all possible values
+            },//Send all possible values
+            success: function (data) {
+                if (data !== ""){
+                    Alerts.danger("Something went wrong. Server response:", data, "Error!");
+                } else {
+                    //Refresh modal body
+                    let modal = $('#modalEvents');
+                    resetModal(modal.attr('data-day'), modal.attr('data-month'), modal.attr('data-mNum'));
+                    Alerts.success("","Success!");
+                }
+            }
         });
-        //Refresh modal body
-        let modal = $('#modalEvents');
-        resetModal(modal.attr('data-day'), modal.attr('data-month'), modal.attr('data-mNum'));
     })
 
     $('#deleteEv').on('click', function () {
         let ids = $('.custom-control-input:checkbox:checked'); //Get all checked checkboxes on page
-        if (ids.length > 1) alert("Warning. Multiple event deleting.");
+        if (ids.length > 1) Alerts.warning("Multiple event deleting", "Warning!");
         for (let id of ids) { //HTTP request for each of selected elements from ids array
             $.ajax({
                 type: 'POST',
                 url: "scripts/database_reqs.php",
-                data: {id: id.getAttribute('data-id'), delete: true} //Send id and specify action
+                data: {id: id.getAttribute('data-id'), delete: true}, //Send id and specify action
+                success: function (data) {
+                    if (data !== ""){
+                        Alerts.danger(data);
+                    }else {
+                        //Refresh modal body
+                        let modal = $('#modalEvents');
+                        resetModal(modal.attr('data-day'), modal.attr('data-month'), modal.attr('data-mNum'));
+                    }
+                }
             });
         }
-        //Refresh modal body
-        let modal = $('#modalEvents');
-        resetModal(modal.attr('data-day'), modal.attr('data-month'), modal.attr('data-mNum'));
     });
 
     $("#year").on("click", function () { //Reset calendar to default values (current time)
@@ -170,10 +183,6 @@ $(document).ready(function () {
     });
 
     $('#changeEvColor').on('change', function () { //Change event color
-        /* TODO
-        *  Must be stored in db
-        *  Implement changing colors with sql in php file
-        * */
         let initStyle = "w-100 m-2 custom-select ";
         let addStyle = "text-light bg-";
         if (parseInt($(this).children(':selected').val()) !== 0) {

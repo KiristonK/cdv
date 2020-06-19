@@ -3,7 +3,7 @@ session_start();
 require_once "connection.php";
 
 if (!empty($_GET['add'])){
-    if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['date'])) {
+    if (!empty($_POST['name']) && !empty($_POST['date'])) {
         $timeE = null;  $name = $_POST['name'];
         $timeS = null;  $description = $_POST['description'];
         $link = null;   $date = $_POST['date'];
@@ -11,30 +11,36 @@ if (!empty($_GET['add'])){
         if (!empty($_POST['time_start']) && !empty($_POST['time_end'])) {
             $timeS = $_POST['time_start'];
             $timeE = $_POST['time_end'];
+        } else {
+            $timeS = "00:00:00";
+            $timeE = "00:00:00";
         }
         if (!empty($_POST['link'])) $link = $_POST['link'];
         if (!empty($_POST['place'])) $place = $_POST['place'];
 
         $user_id  = $_SESSION['user_id'];
-        $sql = "select * from scalendar.events where `name` = '{$name}' and `description` = '{$description}' and `date` = '{$date}' and `user_id` = '{$user_id}'";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        if ($stmt->affected_rows > 0) {
-            $_SESSION['error'] = "Another event on that time already exists.";
-        } else {
-            $stmt->close();
-            $sql = "INSERT INTO scalendar.events(`user_id`, `name`, `date`, `time_start`, `time_stop`, `description`, `link`, `place`) VALUES (?,?,?,?,?,?,?,?);";
-            if ($stmt = $conn->prepare($sql)){
-                $stmt->bind_param('ssssssss', $user_id,$name, $date, $timeS, $timeE, $description, $link, $place);
-                $stmt->execute();
-                if (!empty($stmt->error_list)) {
-                    $_SESSION['error'] = "Error while adding new event.";
-                }
-            }else {
-                echo "Prepare error".$stmt->error;
+        if ($timeE != "00:00:00") $sql = "select * from scalendar.events where date = ? and time_start = ? and time_stop = ? and user_id = ?";
+        else $sql = "select * from scalendar.events where name like(?) and date = ? and user_id = ?";
+        if ($stmt = $conn->prepare($sql)) {
+            if ($timeE != "00:00:00") $stmt->bind_param("ssss", $date, $timeS, $timeE, $user_id);
+            else $stmt->bind_param("sss", $name, $date, $user_id);
+            $stmt->execute();
+            if ($stmt->get_result()->num_rows != 0) {
+                if ($timeE != "00:00:00") echo "Another event on that time already exists";
+                    else echo "Another event with given name already exists";
+            } else {
+                $stmt->close();
+                $sql = "INSERT INTO scalendar.events(`user_id`, `name`, `date`, `time_start`, `time_stop`, `description`, `link`, `place`) VALUES (?,?,?,?,?,?,?,?);";
+                if ($stmt = $conn->prepare($sql)) {
+                    $stmt->bind_param('ssssssss', $user_id, $name, $date, $timeS, $timeE, $description, $link, $place);
+                    $stmt->execute();
+                    if (!empty($stmt->error_list)) {echo "Error while adding new event";}
+                } else { echo "Prepare add event error";}
+                $stmt->close();
             }
-            $stmt->close();
-        }
+        } else {echo "Prepare check for unique error";}
+    } else {
+        echo "Required fields are empty";
     }
 }
 else if (!empty($_GET['edit'])) {
@@ -46,14 +52,14 @@ else if (!empty($_GET['edit'])) {
             $stmt->bind_param("ssssssss", $name, $date, $timeS, $timeE, $description, $link, $place, $id);
             $stmt->execute();
             if (!empty($stmt->error_list)) {
-                $_SESSION['error'] = "Error while saving changes.";
+                echo "Error while saving changes";
             }
         } else {
             echo "Prepare error";
         }
         $stmt->close();
     }
-    else {echo "Empty id !";}
+    else {echo "Empty id";}
 }
 else if (!empty($_POST['delete'])) {
     if (!empty($_POST['id'])){
@@ -63,14 +69,14 @@ else if (!empty($_POST['delete'])) {
             $stmt->bind_param("s",$id);
             $stmt->execute();
             if (!empty($stmt->error_list)) {
-                $_SESSION['error'] = "Error while saving changes.";
+                echo "Error while saving changes";
             }
         } else {
             echo "Prepare error";
         }
         $stmt->close();
     }
-    else {echo "Empty id !";}
+    else {echo "Empty id";}
 }
  else if(!empty($_POST['get'])) {
     if (!empty($_POST['id'])) {
@@ -83,7 +89,7 @@ else if (!empty($_POST['delete'])) {
         echo json_encode($event);
         $stmt->close();
     } else {
-        $_SESSION['error'] = 'Błąd wysyłania żądania.';
+        echo 'Empty id';
     }
 }
 else {

@@ -117,14 +117,14 @@ function resetModal(day, month, monthNum) {
         type: 'POST',
         data: {day: day, month: month, monthNum: monthNum, year: $('#year').text()},
         success: function (data) {
-            $("#modalEventsTable").append(data);
+            $("#modalEventsTable").html(data);
             let size = document.getElementById('modalEventsTable').childNodes.length;
             for (let i = 0; i < size; i++) {
                 let elem = $('#labelCheck' + i);
                 let content = '<div class="col">';
                 if (elem.attr("data-link") !== "") content += '<div class="row">Link:<a href="' + elem.attr("data-link") + '" class="font-weight-light ml-2">' + elem.attr("data-link") + '</a></div>';
                 if (elem.attr("data-place") !== "") content += '<div class="row border-bottom" style="border-color: #d3d3d3;"><p>Place: <a href="https://www.google.com/maps/search/?api=1&query=' + convertPlace(elem.attr("data-place")) + '">' + elem.attr("data-place") + '</a></p></div>';
-                if (elem.attr("data-stime") !== "" && elem.attr("data-etime") !== "") content += '<div class="row border-bottom" style="border-color: #d3d3d3;"><p>From: ' + elem.attr("data-stime") + '    To: ' + elem.attr("data-etime") + '</p></div>'
+                if (elem.attr("data-stime") !== "00:00:00" && elem.attr("data-etime") !== "00:00:00") content += '<div class="row border-bottom" style="border-color: #d3d3d3;"><p>From: ' + elem.attr("data-stime") + '    To: ' + elem.attr("data-etime") + '</p></div>'
                 else content += '<div class="row border-bottom" style="border-color: #d3d3d3;"><p>All day</p></div>';
                 content += '<div class="row""><p>' + elem.attr("data-info") + '</p></div></div>'
                 elem.popover({
@@ -155,4 +155,13 @@ function resetModal(day, month, monthNum) {
             }
         }
     });
+
+    $("#evName").val('');
+    $("#evDesc").val('');
+    $("#evDate").val('');
+    $("#evTS").val('');
+    $("#evTE").val('');
+    $("#evLink").val('');
+    $("#evPlace").val('');
+    $("#event_id").val('');
 }
