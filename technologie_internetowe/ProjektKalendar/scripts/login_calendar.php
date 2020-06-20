@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once './connection.php';
-
+//проверка был ли пользователь зарегестрирован 
 if (isset($_POST['remember']) || !empty($_POST['remember'])) {
     $_SESSION['RM'] = true;
 } else {

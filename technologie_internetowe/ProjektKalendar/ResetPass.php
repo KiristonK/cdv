@@ -1,11 +1,5 @@
 <?php
-  session_start();
-  if(isset($_SESSION['RM'])){
-    if($_SESSION['RM']){
-        header("Location: ./calendar.php");
-        exit();
-  }
-}
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,16 +35,11 @@
         <div class="col-12 d-flex justify-content-center">
             <div class="card w-50"  id="LoginDiv">
                 <div class="card-header">
-                    <h3 class="font-weight-light" id="SignIn">Sign In</h3>
-                    <?php
-                    if(isset($_SESSION['TyForReg'])){
-                        echo <<< THANK
-                            <div class="alert alert-success">
-                                    <h5 class="font-weight-light">Thank you for register</h5>
-                            </div>
-THANK;
-                        unset($_SESSION['TyForReg']);
-                    }
+                    <h3 class="font-weight-light" id="SignIn">Reset Password</h3>
+                    
+                </div>
+
+                <?php
                     if(isset($_SESSION['error'])){
                         echo <<<  ERROR
                             <div class="alert alert-danger">
@@ -59,50 +48,39 @@ THANK;
 ERROR;
                         unset($_SESSION['error']);
                     }
-                    ?>
-                </div>
+                ?>
+
                 <div class="card-body">
-                    <form action="./scripts/login_calendar.php" method="post">
-                       <label for="login" class="form-check-label">Login</label>
+                    
+                    <form action="./scripts/ResetPass_calendar.php?Login=<?php echo $_GET['Login'];?>" method="post">
+                       <label for="login" class="form-check-label">Password</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Login" id="login" name="login" required>
+                            <input type="Password" class="form-control" placeholder="Password" id="login" name="pass" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-user"></span>
                                 </div>
                             </div>
                         </div>
-                        <label for="password" class="form-check-label">Password</label>
+                        
+                        <label for="login" class="form-check-label">Retype password</label>
                         <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Password" id="password" name="pass" required>
+                            <input type="Password" class="form-control" placeholder="Retype password" id="login" name="retpass" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
+                                    <span class="fas fa-user"></span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="remember" name="remember">
-                                    <label class="custom-control-label" for="remember">Remember Me</label>
-                                </div>
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <div class="ForgotAndRegister">
-                            <a href="./Forgot.php?Forgot=pass">Forgot password</a>
-                            -
-                            <a href="./Forgot.php?Forgot=Login">Forgot Login</a>
                         </div>
 
-                        <div class="ForgotAndRegister">
-                            First time here?
-                            <a href="./Register.php"> Sing up</a>
+
+                        <div class="row">
+                            
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block">Reset</button>
+                            </div>
+                            <!-- /.col -->
                         </div>
                     </form>
                 </div>
