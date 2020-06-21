@@ -10,7 +10,8 @@ if (isset($_POST['remember']) || !empty($_POST['remember'])) {
 if (!empty($_POST['login']) && !empty($_POST['pass'])){
     $Login = $_POST['login'];
     $Pass = $_POST['pass'];
-    $sql = "select * from scalendar.user where `Login`= '$Login' and `Password`= '$Pass'";
+    if (preg_match_all("/^(\w*@)/i", $Login) !== FALSE) $sql = "select * from scalendar.user where `Email`= '$Login' and `Password`= '$Pass'";
+    else $sql = "select * from scalendar.user where `Login`= '$Login' and `Password`= '$Pass'";
 
     if($result = mysqli_query($conn,$sql)){
         $row = mysqli_fetch_assoc($result);

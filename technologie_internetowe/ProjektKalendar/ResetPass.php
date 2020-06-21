@@ -18,8 +18,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="scripts/mainScript.js"></script>
-    <script src="scripts/functions.js"></script>
     <title>SCalendar Sign In</title>
 
 </head>
@@ -53,9 +51,9 @@ ERROR;
                 <div class="card-body">
                     
                     <form action="./scripts/ResetPass_calendar.php?Login=<?php echo $_GET['Login'];?>" method="post">
-                       <label for="login" class="form-check-label">Password</label>
+                       <label for="pass" class="form-check-label">Password</label>
                         <div class="input-group mb-3">
-                            <input type="Password" class="form-control" placeholder="Password" id="login" name="pass" required>
+                            <input type="password" class="form-control" autocomplete="new-password" placeholder="Password" id="pass" name="pass" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-key"></span>
@@ -63,9 +61,9 @@ ERROR;
                             </div>
                         </div>
                         
-                        <label for="login" class="form-check-label">Retype password</label>
+                        <label for="ret_pass" class="form-check-label">Retype password</label>
                         <div class="input-group mb-3">
-                            <input type="Password" class="form-control" placeholder="Retype password" id="login" name="retpass" required>
+                            <input type="password" class="form-control" placeholder="Retype password" id="ret_pass" name="ret_pass" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-key"></span>

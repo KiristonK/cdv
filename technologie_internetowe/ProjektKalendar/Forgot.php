@@ -1,6 +1,5 @@
 <?php
   session_start();
-  $_SESSION['Forgot']=$_GET['Forgot'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +18,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="scripts/mainScript.js"></script>
-    <script src="scripts/functions.js"></script>
     <title>SCalendar Sign In</title>
 
 </head>
@@ -36,7 +33,7 @@
         <div class="col-12 d-flex justify-content-center">
             <div class="card w-50"  id="LoginDiv">
                 <div class="card-header">
-                    <h3 class="font-weight-light" id="SignIn">Enter Your Email</h3>
+                    <h3 class="font-weight-light" id="SignIn">Recover <?php echo $_GET['what']?></h3>
                     
                 </div>
 
@@ -52,55 +49,6 @@ ERROR;
                 ?>
 
                 <div class="card-body">
-<!--                    <form action="./scripts/forgot_calendar.php" method="post">-->
-<!--                       <label for="email" class="form-check-label">Email</label>-->
-<!--                        <div class="input-group mb-3">-->
-<!--                            <input type="email" class="form-control" placeholder="Email" id="email" name="email" required>-->
-<!--                            <div class="input-group-append">-->
-<!--                                <div class="input-group-text">-->
-<!--                                    <span class="fas fa-user"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        -->
-<!--                        <div class="row">-->
-<!--                            -->
-                            <!-- /.col -->
-<!--                            <div class="col-4">-->
-<!--                                <button type="submit" class="btn btn-primary">-->
-<!--                                    --><?php
-//                                        if($_GET['Forgot']=='pass'){
-//                                            echo 'Reset your password';
-//                                        }else if($_GET['Forgot']=='Login'){
-//                                            echo 'Reset your Login';
-//                                        }
-//                                    ?>
-<!--                                </button>-->
-<!--                            </div>-->
-                            <!-- /.col -->
-<!--                        </div>-->
-<!--                    </form>-->
-                    <script>
-                        $().ready(function() {
-                            $('#after').fadeOut(0);
-                            $('#recover').on('click', function() {
-                                $.ajax({
-                                    method: 'POST',
-                                    url: "./Scripts/forgot_calendar.php",
-                                    data: {login: $('#email').val(), what: $('#what').val()},
-                                    success: function(data) {
-                                        console.log(data);
-                                    }});
-                                $('#before').fadeOut(400, function() {
-                                    $('#after').fadeIn();
-                                });
-                            });
-
-                            $('#back').on('click', function() {
-                                history.back();
-                            });
-                        })
-                    </script>
                     <div id="before">
                         <input id="what" hidden value="<?php if (isset($_GET['what'])) echo  $_GET['what'];?>">
                         <input type="email" id="email" class="form-control mt-2 mb-2" name="email" placeholder="Enter your email">
@@ -113,11 +61,33 @@ ERROR;
                             <h1 class="font-weight-light">An email with link to recover your <?php echo $_GET['what'];?> has been sent to you.</h1>
                             <h4 class="font-weight-light"> Check spam folder, if there is no email from us in your inbox.</h4>
                             <input type="submit" class="btn btn-outline-primary" value="Sign In">
+                        </form>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
 </body>
 </html>
+
+<script>
+    $().ready(function() {
+        $('#after').fadeOut(0);
+        $('#recover').on('click', function() {
+            $.ajax({
+                method: 'POST',
+                url: "./Scripts/forgot_calendar.php",
+                data: {email: $('#email').val(), what: $('#what').val()},
+                success: function(data) {
+                    console.log(data);
+                }});
+            $('#before').fadeOut(400, function() {
+                $('#after').fadeIn();
+            });
+        });
+
+        $('#back').on('click', function() {
+            history.back();
+        });
+    })
+</script>

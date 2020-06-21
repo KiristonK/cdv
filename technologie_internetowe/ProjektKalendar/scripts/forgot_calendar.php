@@ -10,15 +10,16 @@
     $email = $_POST['email'];
     $sql = "select * from scalendar.user where `Email` = '$email'";
 
+    //Select user with given email
     if($result = mysqli_query($conn,$sql)){
 	    $message = "<html><head><title>Password recovery</title></head><body>";
         $row = mysqli_fetch_assoc($result);
         if(empty($row)){
-            //данного мейла нет в базе данных
-            $_SESSION['error']="Invalid Email.";
-            $message = "Hello, dear ".$email.", unfortunately we can't find your e-mail in our database, please check it for any mistakes, or <a href='../Register.php'>Register Now</a></p>";
+            //There is no email in db
+            $message = "Hello, dear ".$email.", unfortunately we can't find your e-mail in our database, please check it for any mistakes, or <a href='http://localhost:63342/lessons/Register.php'>Register Now</a></p>";
             ?><script>history.back();</script><?php
         }else {
+            //Email is found
 	        $Login = $row['Login'];
 	        $message = "Hello, dear ".$email.", please follow by this ";
 	        if ($_POST['what'] == "password") $message .= "<a href='http://localhost:63342/lessons/ResetPass.php?Login=".$row['Login']."'>Link</a> to recover your password";
@@ -31,6 +32,4 @@
     }else{
         echo 'Error';
     }
-
-//проверка на существование мейла
 ?>
