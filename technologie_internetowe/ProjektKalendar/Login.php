@@ -41,7 +41,7 @@
         <div class="col-12 d-flex justify-content-center">
             <div class="card w-50"  id="LoginDiv">
                 <div class="card-header">
-                    <h3 class="font-weight-light" id="SignIn">Sign In</h3>
+                    <h3 class="font-weight-light" id="SignIn"><?php if(isset($_GET['pass_recovery'])) echo "Recover password"; else echo "Sign In";?></h3>
                     <?php
                     if(isset($_SESSION['TyForReg'])){
                         echo <<< THANK
@@ -95,9 +95,9 @@ ERROR;
                             <!-- /.col -->
                         </div>
                         <div class="ForgotAndRegister">
-                            <a href="./Forgot.php?Forgot=pass">Forgot password</a>
+                            <a href="./Forgot.php?what=password">Forgot password</a>
                             -
-                            <a href="./Forgot.php?Forgot=Login">Forgot Login</a>
+                            <a href="./Forgot.php?what=email">Forgot Login</a>
                         </div>
 
                         <div class="ForgotAndRegister">

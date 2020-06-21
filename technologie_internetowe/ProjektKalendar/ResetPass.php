@@ -58,7 +58,7 @@ ERROR;
                             <input type="Password" class="form-control" placeholder="Password" id="login" name="pass" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
+                                    <span class="fas fa-key"></span>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@ ERROR;
                             <input type="Password" class="form-control" placeholder="Retype password" id="login" name="retpass" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
+                                    <span class="fas fa-key"></span>
                                 </div>
                             </div>
                         </div>

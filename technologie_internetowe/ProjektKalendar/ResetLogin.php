@@ -32,7 +32,7 @@
         <div class="col-12 d-flex justify-content-center">
             <div class="card w-50"  id="LoginDiv">
                 <div class="card-header">
-                    <h3 class="font-weight-light" id="SignIn">Your login: <?php echo $_GET['Login'];?> </h3>
+                    <h3 class="font-weight-light" id="SignIn">Your login: <?php echo $_GET['email'];?> </h3>
                     
                 </div>
 

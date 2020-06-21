@@ -52,33 +52,68 @@ ERROR;
                 ?>
 
                 <div class="card-body">
-                    <form action="./scripts/forgot_calendar.php" method="post">
-                       <label for="login" class="form-check-label">Email</label>
-                        <div class="input-group mb-3">
-                            <input type="Email" class="form-control" placeholder="Email" id="login" name="login" required>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            
+<!--                    <form action="./scripts/forgot_calendar.php" method="post">-->
+<!--                       <label for="email" class="form-check-label">Email</label>-->
+<!--                        <div class="input-group mb-3">-->
+<!--                            <input type="email" class="form-control" placeholder="Email" id="email" name="email" required>-->
+<!--                            <div class="input-group-append">-->
+<!--                                <div class="input-group-text">-->
+<!--                                    <span class="fas fa-user"></span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        -->
+<!--                        <div class="row">-->
+<!--                            -->
                             <!-- /.col -->
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    <?php
-                                        if($_GET['Forgot']=='pass'){
-                                            echo 'Reset your password';
-                                        }else if($_GET['Forgot']=='Login'){
-                                            echo 'Reset your Login';
-                                        }
-                                    ?>
-                                </button>
-                            </div>
+<!--                            <div class="col-4">-->
+<!--                                <button type="submit" class="btn btn-primary">-->
+<!--                                    --><?php
+//                                        if($_GET['Forgot']=='pass'){
+//                                            echo 'Reset your password';
+//                                        }else if($_GET['Forgot']=='Login'){
+//                                            echo 'Reset your Login';
+//                                        }
+//                                    ?>
+<!--                                </button>-->
+<!--                            </div>-->
                             <!-- /.col -->
-                        </div>
+<!--                        </div>-->
+<!--                    </form>-->
+                    <script>
+                        $().ready(function() {
+                            $('#after').fadeOut(0);
+                            $('#recover').on('click', function() {
+                                $.ajax({
+                                    method: 'POST',
+                                    url: "./Scripts/forgot_calendar.php",
+                                    data: {login: $('#email').val(), what: $('#what').val()},
+                                    success: function(data) {
+                                        console.log(data);
+                                    }});
+                                $('#before').fadeOut(400, function() {
+                                    $('#after').fadeIn();
+                                });
+                            });
+
+                            $('#back').on('click', function() {
+                                history.back();
+                            });
+                        })
+                    </script>
+                    <div id="before">
+                        <input id="what" hidden value="<?php if (isset($_GET['what'])) echo  $_GET['what'];?>">
+                        <input type="email" id="email" class="form-control mt-2 mb-2" name="email" placeholder="Enter your email">
+                        <input type="button" id="recover" class="btn btn-primary mt-2 mb-2 d-inline-block" value="Recover">
+                        <input type="button" id="back" class="btn btn-secondary mt-2 mb-2 d-inline-block" value="Back">
+                    </div>
+
+                    <div id="after">
+                        <form action="Login.php" method="post">
+                            <h1 class="font-weight-light">An email with link to recover your <?php echo $_GET['what'];?> has been sent to you.</h1>
+                            <h4 class="font-weight-light"> Check spam folder, if there is no email from us in your inbox.</h4>
+                            <input type="submit" class="btn btn-outline-primary" value="Sign In">
+                    </div>
                     </form>
                 </div>
             </div>
