@@ -120,7 +120,7 @@ $(document).ready(function () {
         let month = $('.months').find('.active')[0].id.match(/([^nav])/g); //Get month number from active month id using Regex
         year = year - 1;
         $("#kalDays").fadeOut('fast', function () { //Animation for calendar redraw
-            generateCalendar(0, month, year);
+            generateCalendar(1, month, year);
             $("#kalDays").fadeIn('fast');
         });
         redrawMenu(year);
@@ -130,7 +130,7 @@ $(document).ready(function () {
         let month = $('.months').find('.active')[0].id.match(/([^nav])/g); //Get month number from active month id using Regex
         year = year + 1;
         $("#kalDays").fadeOut('fast', function () { //Animation for calendar redraw
-            generateCalendar(0, month, year);
+            generateCalendar(1, month, year);
             $("#kalDays").fadeIn('fast');
         });
         redrawMenu(year);
@@ -143,7 +143,7 @@ $(document).ready(function () {
         let id = this.id;
         document.getElementById(id + "nav").classList.add('active'); //Set selected month as active
         $("#kalDays").fadeOut('fast', function () {
-            generateCalendar(0, id, year);
+            generateCalendar(1, id, year);
             $("#kalDays").fadeIn('fast');
         });
     });
@@ -153,7 +153,7 @@ $(document).ready(function () {
         document.getElementById(id + "nav").classList.add('active'); //Set selected month as active
         redrawMenu(year, id);
         $("#kalDays").fadeOut('fast', function () { //Animation for calendar redraw
-            generateCalendar(0, id, year);
+            generateCalendar(1, id, year);
             $("#kalDays").fadeIn('fast');
         });
     });
@@ -163,7 +163,7 @@ $(document).ready(function () {
         document.getElementById(id + "nav").classList.add('active'); //Set selected month as active
         redrawMenu(year, id);
         $("#kalDays").fadeOut('fast', function () { //Animation for calendar redraw
-            generateCalendar(0, id, year);
+            generateCalendar(1, id, year);
             $("#kalDays").fadeIn('fast');
         });
     });

@@ -20,19 +20,26 @@ function isDatesSame(date1, date2) {
 
 function generateCalendar(day, month, year) {
     const date = new Date();
-    if (day == null || day === 0) day = 1;
+    if (day == null || day <= 0) day = 1;
     if (month == null) {
         month = date.getMonth();
-    } else document.getElementById('kalDays').innerHTML = "";
-    if (year == null || year === 0) year = date.getFullYear();
+    } else {
+        const myNode = document.getElementById('kalDays');
+        while (myNode.firstChild) {
+            myNode.removeChild(myNode.lastChild);
+        }
+    }
+    if (year == null || year <= 0) year = date.getFullYear();
+    month = parseInt(month);
     let oMonth = month;
     let extraDays = "<div class=\"card-body m-2 p-0 rounded day text-center\" ><a role='button' class=\"display-4 out-of-days\" style='z-index: -1' >";
     let regDay = "<div class=\"card-body m-2 p-0 rounded day text-center\" data-toggle=\"modal\" data-target=\"#modalEvents\"><a role='button' class=\"display-4\" style='z-index: -1'>";
+    let allDays = new Date(Date.UTC(year, month+1, 0)).getDate();
+    console.log(month+1, allDays);
     for (let y = 0; y < 6; y++) {
         let row = document.createElement("div");
         row.classList.add('row');
         row.id = 'week' + y;
-        let allDays = new Date(Date.UTC(year, month + 1, 0)).getDate();
         for (let i = 0; i < 7; i++) {
             let dayOfWeek = new Date(Date.UTC(year, month, day, 0, 0)).getDay();
             if (dayOfWeek === i && day <= allDays) {
@@ -43,7 +50,7 @@ function generateCalendar(day, month, year) {
                     row.innerHTML += extraDays + day + "</a></div>\n";
                 day++;
             } else {
-                if (day >= allDays) {
+                if (day > allDays) {
                     day = 1;
                     row.innerHTML += extraDays + day + "</h1></div>\n";
                     day++;
